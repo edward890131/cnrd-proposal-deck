@@ -711,6 +711,9 @@ const PhoneDemo: Page = () => {
 // Style B 頁面：設計核心、捲動轉場分鏡、主視覺概念、網站架構、電腦版 demo、手機版 demo
 // 版面沿用 Style A 的同一套元件；文案都在檔案上方的 B 物件
 // =====================================================================
+// 設計核心頁的文字底：'full' = 跟 A 一樣整片深色半透明；'panel' = 文字後方一塊白色半透明
+const CORE_OVERLAY = 'panel' as 'full' | 'panel';
+
 // B 款開場：滿版 MacBook 情境圖（進入 Style B 前的過場頁）
 const Style2Cover: Page = () => (
   <Frame style={{ background: '#000' }}>
@@ -724,27 +727,43 @@ const Style2Core: Page = () => (
     <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
       <Eyebrow>STYLE B | Design core</Eyebrow>
       <Title size={72}>{B.core.title}</Title>
+      {/* 跟 A 款同結構：圖片滿版，文字置中，中間墊一層半透明色塊讓字清楚 */}
       <div
         className="cn-rise"
-        style={{
-          position: 'relative',
-          marginTop: 64,
-          height: 560,
-          borderRadius: 12,
-          overflow: 'hidden',
-          background: c.card,
-          boxShadow: '0 0 0 1px rgba(0,0,0,.06)',
-          display: 'flex',
-          alignItems: 'center',
-          animationDelay: '160ms',
-        }}
+        style={{ position: 'relative', marginTop: 64, height: 560, borderRadius: 12, overflow: 'hidden', background: c.card, animationDelay: '160ms' }}
       >
-        <img src={bCore} alt="" style={{ height: '100%', width: 760, objectFit: 'contain', display: 'block', flex: 'none' }} />
-        <p style={{ margin: '0 0 0 40px', fontSize: 48, fontWeight: 500, lineHeight: 1.6, color: 'var(--osd-text)' }}>
-          {B.core.statement[0]}
-          <br />
-          {B.core.statement[1]}
-        </p>
+        <img src={bCore} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 47%' }} />
+        {CORE_OVERLAY === 'full' ? (
+          <>
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(20,24,32,.55)' }} />
+            <p style={{ position: 'absolute', inset: 0, margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: '#fff', fontSize: 48, fontWeight: 500, lineHeight: 1.6 }}>
+              {B.core.statement[0]}
+              <br />
+              {B.core.statement[1]}
+            </p>
+          </>
+        ) : (
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <p
+              style={{
+                margin: 0,
+                padding: '40px 72px',
+                borderRadius: 12,
+                background: 'rgba(255,255,255,.85)',
+                boxShadow: '0 12px 32px -16px rgba(0,0,0,.25)',
+                textAlign: 'center',
+                color: 'var(--osd-text)',
+                fontSize: 48,
+                fontWeight: 500,
+                lineHeight: 1.6,
+              }}
+            >
+              {B.core.statement[0]}
+              <br />
+              {B.core.statement[1]}
+            </p>
+          </div>
+        )}
       </div>
     </div>
     <PageNo />
