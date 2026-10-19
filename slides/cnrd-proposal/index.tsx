@@ -23,6 +23,7 @@ import mockupStyle2 from './assets/mockup-style2.jpg'; // MacBook Pro 情境照�
 import phoneHome from './assets/phone-home.jpg'; // 手機版首頁截圖（非播放中的縮圖用）
 
 // ---------- Style B 素材（2026-10-19 從初稿「CRND 首屏投影 v68」截取） ----------
+import bCover from './assets/b-cover.jpg'; // B 款開場：滿版 MacBook 情境圖
 import bHero from './assets/b-hero.jpg'; // 首屏 Grow Beyond
 import bCore from './assets/b-core.jpg'; // 色塊碰撞構圖（設計核心頁）
 import bIntroLoop from './assets/b-intro-loop.mp4'; // loading → 首屏的動態（12 秒，循環播放）
@@ -81,6 +82,7 @@ const B = {
   core: {
     title: '從靈動結構出發，展現多元活力，匯聚改變的能量',
     statement: ['抽象示意能量的碰撞，', '以更前瞻的視角訴說品牌精神'],
+    textLeft: 900, // 文字在框內的起始 x（對齊色塊圖中間的留白）
   },
   story: {
     title: '讓故事持續：一組色塊，激發多變想像力',
@@ -710,29 +712,47 @@ const PhoneDemo: Page = () => {
 // Style B 頁面：設計核心、捲動轉場分鏡、主視覺概念、網站架構、電腦版 demo、手機版 demo
 // 版面沿用 Style A 的同一套元件；文案都在檔案上方的 B 物件
 // =====================================================================
+// B 款開場：滿版 MacBook 情境圖（進入 Style B 前的過場頁）
+const Style2Cover: Page = () => (
+  <Frame style={{ background: '#000' }}>
+    <img src={bCover} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+  </Frame>
+);
+
 const Style2Core: Page = () => (
   <Frame>
     <Header section="Style B・設計核心" />
     <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
       <Eyebrow>STYLE B | Design core</Eyebrow>
       <Title size={72}>{B.core.title}</Title>
+      {/* 色塊構圖滿版（使用者提供 3360×1200 @2x），文字放在中間的留白區 */}
       <div
         className="cn-rise"
         style={{
           position: 'relative',
-          marginTop: 64,
-          height: 560,
+          marginTop: 56,
+          height: 600,
           borderRadius: 12,
           overflow: 'hidden',
           background: c.card,
           boxShadow: '0 0 0 1px rgba(0,0,0,.06)',
-          display: 'flex',
-          alignItems: 'center',
           animationDelay: '160ms',
         }}
       >
-        <img src={bCore} alt="" style={{ height: '100%', width: 760, objectFit: 'contain', display: 'block', flex: 'none' }} />
-        <p style={{ margin: '0 0 0 40px', fontSize: 48, fontWeight: 500, lineHeight: 1.6, color: 'var(--osd-text)' }}>
+        <img src={bCore} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <p
+          style={{
+            position: 'absolute',
+            left: B.core.textLeft,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            margin: 0,
+            fontSize: 40,
+            fontWeight: 500,
+            lineHeight: 1.6,
+            color: 'var(--osd-text)',
+          }}
+        >
           {B.core.statement[0]}
           <br />
           {B.core.statement[1]}
@@ -1084,7 +1104,8 @@ export const notes: (string | undefined)[] = [
   '網站一共七站，每一站就是地圖上的一個鏡頭位置，滑一下就到下一站。',
   '接下來直接操作網站。先點一下畫面就能拖曳、滾動；要回簡報，點網站外面再按方向鍵。',
   '手機版一樣能操作，上面是地圖、下面是內容，用手指拖曳就能逛。',
-  '接下來是 B 款「創意匯流」。B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
+  '接下來是 B 款「創意匯流」，先看它的首頁在電腦上的樣子。',
+  'B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
   'B 款的開場影片。（影片製作中，完成後補上）',
   '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，幾何的碰撞、變化與轉場，以及用捲動把每個段落串起來。',
   '往下捲的時候，故事會一直延續。同一組色塊會組合成不同的結構，分別代表場域、人才和產業推動。',
@@ -1108,6 +1129,7 @@ export default [
   SiteMap,
   LivePrototype,
   PhoneDemo,
+  Style2Cover,
   Style2Core,
   Style2Film,
   Style2KeyVisual,
