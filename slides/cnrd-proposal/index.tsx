@@ -24,17 +24,13 @@ import phoneHome from './assets/phone-home.jpg'; // 手機版首頁截圖（非�
 
 // ---------- Style B 素材（2026-10-19 從初稿「CRND 首屏投影 v68」截取） ----------
 import bHero from './assets/b-hero.jpg'; // 首屏 Grow Beyond
-import bCore from './assets/b-core.jpg'; // 同心環畫面，設計核心頁底圖
-import bScene0 from './assets/b-scene-0.jpg';
-import bScene1 from './assets/b-scene-1.jpg';
-import bScene2 from './assets/b-scene-2.jpg';
-import bScene3 from './assets/b-scene-3.jpg';
-import bScene4 from './assets/b-scene-4.jpg';
-import bScene5 from './assets/b-scene-5.jpg';
-import bScene6 from './assets/b-scene-6.jpg';
+import bCore from './assets/b-core.jpg'; // 色塊碰撞構圖（設計核心頁）
 import bIntroLoop from './assets/b-intro-loop.mp4'; // loading → 首屏的動態（12 秒，循環播放）
 import bIntroLoopWebm from './assets/b-intro-loop.webm'; // 同一段動態的 WebM 版（備援）
 // 色塊變化的不同視角（只留 3D 色塊、隱藏文字介面截取）
+import bStructField from './assets/b-struct-field.png'; // 結構概念：場域
+import bStructTalent from './assets/b-struct-talent.png'; // 結構概念：人才
+import bStructIndustry from './assets/b-struct-industry.png'; // 結構概念：產業推動
 import bShape00 from './assets/b-shape-00.jpg';
 import bShape01 from './assets/b-shape-01.jpg';
 import bShape02 from './assets/b-shape-02.jpg';
@@ -49,7 +45,7 @@ import bShape10 from './assets/b-shape-10.jpg';
 import bShape11 from './assets/b-shape-11.jpg';
 import bPhone from './assets/b-phone.jpg'; // 手機版首頁截圖（393 寬 @2x）
 // Style B 網站：簡報第 14、15 頁直接嵌入正式網址，網站更新後簡報自動同步
-const B_SITE_URL = 'https://crnd-b.vercel.app/';
+const B_SITE_URL = 'https://cnrd-b.vercel.app/';
 
 // ---------- Design tokens（取自網站 hero-map.html 的 CSS 變數） ----------
 export const design: DesignSystem = {
@@ -81,21 +77,18 @@ const SITE_URL = 'https://cathay-rd-web.vercel.app/';
 const B = {
   name: '創意匯流', // 第 2 頁對比用的風格名稱
   siteUrl: B_SITE_URL,
-  siteLabel: 'crnd-b.vercel.app', // demo 頁右上角顯示的文字
+  siteLabel: 'cnrd-b.vercel.app', // demo 頁右上角顯示的文字
   core: {
     title: '從靈動結構出發，展現多元活力，匯聚改變的能量',
-    question: ['如何讓產業與學界的能量，', '在一次捲動裡匯流、碰撞？'],
+    statement: ['抽象示意能量的碰撞，', '以更前瞻的視角訴說品牌精神'],
   },
   story: {
     title: '讓故事持續：一組色塊，激發多變想像力',
-    scenes: [
-      { src: bScene0, name: '俯視 CRND', note: '從建築平面開場' },
-      { src: bScene1, name: '建築長出', note: '平面立起成量體' },
-      { src: bScene2, name: '轉向正面', note: '色塊帶出首屏' },
-      { src: bScene3, name: '翻轉成柱', note: '錯位、堆成階梯' },
-      { src: bScene4, name: '接球協作', note: '理念與使命三段' },
-      { src: bScene5, name: '同心環', note: '色塊環繞成圓' },
-      { src: bScene6, name: '穿越隧道', note: '進入計畫亮點' },
+    // 代表性色塊組合（來源：Figma「結構概念」）
+    structures: [
+      { src: bStructField, name: '場域' },
+      { src: bStructTalent, name: '人才' },
+      { src: bStructIndustry, name: '產業推動' },
     ],
   },
   keyVisual: {
@@ -725,28 +718,24 @@ const Style2Core: Page = () => (
       <Title size={72}>{B.core.title}</Title>
       <div
         className="cn-rise"
-        style={{ position: 'relative', marginTop: 64, height: 560, borderRadius: 12, overflow: 'hidden', animationDelay: '160ms' }}
+        style={{
+          position: 'relative',
+          marginTop: 64,
+          height: 560,
+          borderRadius: 12,
+          overflow: 'hidden',
+          background: c.card,
+          boxShadow: '0 0 0 1px rgba(0,0,0,.06)',
+          display: 'flex',
+          alignItems: 'center',
+          animationDelay: '160ms',
+        }}
       >
-        <img src={bCore} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 50%' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(20,24,32,.6)' }} />
-        <p
-          style={{
-            position: 'absolute',
-            inset: 0,
-            margin: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'center',
-            color: '#fff',
-            fontSize: 48,
-            fontWeight: 500,
-            lineHeight: 1.6,
-          }}
-        >
-          {B.core.question[0]}
+        <img src={bCore} alt="" style={{ height: '100%', width: 760, objectFit: 'contain', display: 'block', flex: 'none' }} />
+        <p style={{ margin: '0 0 0 40px', fontSize: 48, fontWeight: 500, lineHeight: 1.6, color: 'var(--osd-text)' }}>
+          {B.core.statement[0]}
           <br />
-          {B.core.question[1]}
+          {B.core.statement[1]}
         </p>
       </div>
     </div>
@@ -754,18 +743,7 @@ const Style2Core: Page = () => (
   </Frame>
 );
 
-// 捲動轉場分鏡：B 沒有開場影片，改用 7 個轉場畫面＋一格說明（4 × 2）
-const SceneCard = ({ src, n, name, note }: { src: string; n: string; name: string; note: string }) => (
-  <figure style={{ margin: 0, minWidth: 0 }}>
-    <Shot src={src} w="100%" h={236} />
-    <figcaption style={{ marginTop: 16, display: 'flex', alignItems: 'baseline', gap: 12 }}>
-      <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 20, color: 'var(--osd-accent)' }}>{n}</span>
-      <span style={{ fontSize: 28, fontWeight: 700 }}>{name}</span>
-      <span style={{ fontSize: 22, color: c.muted }}>{note}</span>
-    </figcaption>
-  </figure>
-);
-
+// 捲動轉場：三組代表性的色塊組合（場域／人才／產業推動）
 const Style2Story: Page = () => (
   <Frame>
     <Header section="Style B・捲動轉場" />
@@ -775,43 +753,31 @@ const Style2Story: Page = () => (
     </div>
     <div
       className="cn-rise"
-      style={{
-        position: 'absolute',
-        top: TOP + 148,
-        left: PAD,
-        right: PAD,
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        columnGap: 24,
-        rowGap: 36,
-        animationDelay: '120ms',
-      }}
+      style={{ position: 'absolute', top: TOP + 172, left: PAD, right: PAD, display: 'flex', gap: 40, animationDelay: '120ms' }}
     >
-      {B.story.scenes.map((s, i) => (
-        <SceneCard key={s.name} src={s.src} n={String(i + 1).padStart(2, '0')} name={s.name} note={s.note} />
+      {B.story.structures.map((s, i) => (
+        <figure key={s.name} style={{ margin: 0, flex: 1, minWidth: 0 }}>
+          <div
+            style={{
+              height: 480,
+              borderRadius: 12,
+              background: c.card,
+              boxShadow: '0 0 0 1px rgba(0,0,0,.06), 0 12px 32px -12px rgba(0,0,0,.18)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <img src={s.src} alt="" style={{ width: 440, height: 440, objectFit: 'contain', display: 'block' }} />
+          </div>
+          <figcaption style={{ marginTop: 28, display: 'flex', alignItems: 'baseline', gap: 16 }}>
+            <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 24, color: 'var(--osd-accent)' }}>
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span style={{ fontSize: 36, fontWeight: 700 }}>{s.name}</span>
+          </figcaption>
+        </figure>
       ))}
-      <div
-        style={{
-          height: 236,
-          borderRadius: 12,
-          background: 'var(--osd-text)',
-          color: '#fff',
-          padding: '0 36px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          gap: 12,
-        }}
-      >
-        <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 20, letterSpacing: '.06em', color: 'var(--osd-accent)' }}>
-          ONE TAKE
-        </span>
-        <span style={{ fontSize: 30, fontWeight: 700, lineHeight: 1.4 }}>
-          同一組色塊一路變形，
-          <br />
-          不換場景、不跳頁
-        </span>
-      </div>
     </div>
     <PageNo />
   </Frame>
@@ -1118,10 +1084,10 @@ export const notes: (string | undefined)[] = [
   '網站一共七站，每一站就是地圖上的一個鏡頭位置，滑一下就到下一站。',
   '接下來直接操作網站。先點一下畫面就能拖曳、滾動；要回簡報，點網站外面再按方向鍵。',
   '手機版一樣能操作，上面是地圖、下面是內容，用手指拖曳就能逛。',
-  '接下來是 B 款「創意匯流」。B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。想回答的問題是：怎麼讓產業和學界的能量，在一次捲動裡匯流、碰撞。',
+  '接下來是 B 款「創意匯流」。B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
   'B 款的開場影片。（影片製作中，完成後補上）',
   '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，幾何的碰撞、變化與轉場，以及用捲動把每個段落串起來。',
-  '往下捲的時候，故事會一直延續：同一組色塊從建築平面開始，翻成階梯、繞成圓環，最後穿過隧道進到計畫亮點，中間不換場景。',
+  '往下捲的時候，故事會一直延續。同一組色塊會組合成不同的結構，分別代表場域、人才和產業推動。',
   '這頁是色塊在不同段落的樣子，同一組色塊一路推進，變出十二種不同的結構。',
   '直接操作看看。往下捲就能看到轉場，上方可以重播開場。要回簡報，點網站外面再按方向鍵。',
   '手機版改成單欄，色塊轉場一樣會播放。',
