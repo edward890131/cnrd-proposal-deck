@@ -23,6 +23,7 @@ import mockupStyle2 from './assets/mockup-style2.jpg'; // MacBook Pro 情境照�
 import phoneHome from './assets/phone-home.jpg'; // 手機版首頁截圖（非播放中的縮圖用）
 
 // ---------- Style B 素材（2026-10-19 從初稿「CRND 首屏投影 v68」截取） ----------
+import bCover from './assets/b-cover.jpg'; // B 款開場：滿版 MacBook 情境圖
 import bHero from './assets/b-hero.jpg'; // 首屏 Grow Beyond
 import bCore from './assets/b-core.jpg'; // 色塊碰撞構圖（設計核心頁）
 import bIntroLoop from './assets/b-intro-loop.mp4'; // loading → 首屏的動態（12 秒，循環播放）
@@ -710,6 +711,13 @@ const PhoneDemo: Page = () => {
 // Style B 頁面：設計核心、捲動轉場分鏡、主視覺概念、網站架構、電腦版 demo、手機版 demo
 // 版面沿用 Style A 的同一套元件；文案都在檔案上方的 B 物件
 // =====================================================================
+// B 款開場：滿版 MacBook 情境圖（進入 Style B 前的過場頁）
+const Style2Cover: Page = () => (
+  <Frame style={{ background: '#000' }}>
+    <img src={bCover} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+  </Frame>
+);
+
 const Style2Core: Page = () => (
   <Frame>
     <Header section="Style B・設計核心" />
@@ -1084,7 +1092,8 @@ export const notes: (string | undefined)[] = [
   '網站一共七站，每一站就是地圖上的一個鏡頭位置，滑一下就到下一站。',
   '接下來直接操作網站。先點一下畫面就能拖曳、滾動；要回簡報，點網站外面再按方向鍵。',
   '手機版一樣能操作，上面是地圖、下面是內容，用手指拖曳就能逛。',
-  '接下來是 B 款「創意匯流」。B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
+  '接下來是 B 款「創意匯流」，先看它的首頁在電腦上的樣子。',
+  'B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
   'B 款的開場影片。（影片製作中，完成後補上）',
   '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，幾何的碰撞、變化與轉場，以及用捲動把每個段落串起來。',
   '往下捲的時候，故事會一直延續。同一組色塊會組合成不同的結構，分別代表場域、人才和產業推動。',
@@ -1108,6 +1117,7 @@ export default [
   SiteMap,
   LivePrototype,
   PhoneDemo,
+  Style2Cover,
   Style2Core,
   Style2Film,
   Style2KeyVisual,
