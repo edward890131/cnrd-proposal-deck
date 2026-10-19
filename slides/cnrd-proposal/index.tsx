@@ -82,6 +82,7 @@ const B = {
   core: {
     title: '從靈動結構出發，展現多元活力，匯聚改變的能量',
     statement: ['抽象示意能量的碰撞，', '以更前瞻的視角訴說品牌精神'],
+    textLeft: 900, // 文字在框內的起始 x（對齊色塊圖中間的留白）
   },
   story: {
     title: '讓故事持續：一組色塊，激發多變想像力',
@@ -724,7 +725,7 @@ const Style2Core: Page = () => (
     <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
       <Eyebrow>STYLE B | Design core</Eyebrow>
       <Title size={72}>{B.core.title}</Title>
-      {/* 圖左字右：色塊圖完整顯示（含上方黃色圓球），右側放說明 */}
+      {/* 色塊構圖滿版（使用者提供 3360×1200 @2x），文字放在中間的留白區 */}
       <div
         className="cn-rise"
         style={{
@@ -735,13 +736,23 @@ const Style2Core: Page = () => (
           overflow: 'hidden',
           background: c.card,
           boxShadow: '0 0 0 1px rgba(0,0,0,.06)',
-          display: 'flex',
-          alignItems: 'center',
           animationDelay: '160ms',
         }}
       >
-        <img src={bCore} alt="" style={{ height: '100%', width: 'auto', display: 'block', flex: 'none', marginLeft: 24 }} />
-        <p style={{ margin: '0 0 0 48px', fontSize: 48, fontWeight: 500, lineHeight: 1.6, color: 'var(--osd-text)' }}>
+        <img src={bCore} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <p
+          style={{
+            position: 'absolute',
+            left: B.core.textLeft,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            margin: 0,
+            fontSize: 40,
+            fontWeight: 500,
+            lineHeight: 1.6,
+            color: 'var(--osd-text)',
+          }}
+        >
           {B.core.statement[0]}
           <br />
           {B.core.statement[1]}
