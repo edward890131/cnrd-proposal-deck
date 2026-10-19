@@ -1,4 +1,4 @@
-// CNRD 共創聚落官網提案簡報 — 2026-10-17 兩款合併版，共 15 頁（封面純色、兩款電腦版對比、Style A 影片／架構／電腦版與手機版 demo）
+// CNRD 共創聚落官網提案簡報 — 2026-10-19 兩款合併版，共 16 頁（封面、兩款對比、Style A 六頁、Style B 七頁〔依初稿 v68〕、結尾）
 // 細節交給開場影片與現場 demo，簡報只留概念、影片、架構、設計系統、待確認事項
 // 版面：1920 × 1080 畫布；內頁共用 Header（CNRD＋章節）＋右下頁碼；封面與結尾用夜晚城市滿版首尾呼應
 import {
@@ -19,8 +19,37 @@ import designSystemShot from './assets/design-system.jpg';
 import videoPoster from './assets/video-poster.jpg';
 import openingFilm from './assets/opening-film.mp4';
 import mockupStyle1 from './assets/mockup-style1.jpg'; // MacBook Pro 情境照＋Style A 電腦版首頁
-import mockupStyle2 from './assets/mockup-style2.jpg'; // Style B 還沒給，先放「待放入」佔位畫面
+import mockupStyle2 from './assets/mockup-style2.jpg'; // MacBook Pro 情境照＋Style B 電腦版首頁（初稿 v68 合成）
 import phoneHome from './assets/phone-home.jpg'; // 手機版首頁截圖（非播放中的縮圖用）
+
+// ---------- Style B 素材（2026-10-19 從初稿「CRND 首屏投影 v68」截取） ----------
+import bHero from './assets/b-hero.jpg'; // 首屏 Grow Beyond
+import bCore from './assets/b-core.jpg'; // 同心環畫面，設計核心頁底圖
+import bScene0 from './assets/b-scene-0.jpg';
+import bScene1 from './assets/b-scene-1.jpg';
+import bScene2 from './assets/b-scene-2.jpg';
+import bScene3 from './assets/b-scene-3.jpg';
+import bScene4 from './assets/b-scene-4.jpg';
+import bScene5 from './assets/b-scene-5.jpg';
+import bScene6 from './assets/b-scene-6.jpg';
+import bIntroLoop from './assets/b-intro-loop.mp4'; // loading → 首屏的動態（12 秒，循環播放）
+import bIntroLoopWebm from './assets/b-intro-loop.webm'; // 同一段動態的 WebM 版（備援）
+// 色塊變化的不同視角（只留 3D 色塊、隱藏文字介面截取）
+import bShape00 from './assets/b-shape-00.jpg';
+import bShape01 from './assets/b-shape-01.jpg';
+import bShape02 from './assets/b-shape-02.jpg';
+import bShape03 from './assets/b-shape-03.jpg';
+import bShape04 from './assets/b-shape-04.jpg';
+import bShape05 from './assets/b-shape-05.jpg';
+import bShape06 from './assets/b-shape-06.jpg';
+import bShape07 from './assets/b-shape-07.jpg';
+import bShape08 from './assets/b-shape-08.jpg';
+import bShape09 from './assets/b-shape-09.jpg';
+import bShape10 from './assets/b-shape-10.jpg';
+import bShape11 from './assets/b-shape-11.jpg';
+import bPhone from './assets/b-phone.jpg'; // 手機版首頁截圖（393 寬 @2x）
+// Style B 初稿網頁本身：簡報裡直接嵌入操作（換成正式網址時，改 B.siteUrl 即可）
+const B_SITE_FILE = new URL('./assets/style-b.html', import.meta.url).href;
 
 // ---------- Design tokens（取自網站 hero-map.html 的 CSS 變數） ----------
 export const design: DesignSystem = {
@@ -44,6 +73,54 @@ const c = {
 };
 
 const SITE_URL = 'https://cathay-rd-web.vercel.app/';
+
+// =====================================================================
+// Style B 文案（集中在這裡；設計稿更新時只改這一區＋替換 assets/b-*.jpg）
+// 來源：初稿 HTML（CRND 首屏投影 v68）＋ Figma「10/06 視覺溝通」B 方向
+// =====================================================================
+const B = {
+  name: '創意匯流', // 第 2 頁對比用的風格名稱
+  siteUrl: B_SITE_FILE, // 有正式網址後換成 'https://…'
+  siteLabel: 'Style B 初稿 v68', // demo 頁右上角顯示的文字
+  core: {
+    title: '從靈動結構出發，展現多元活力，匯聚改變的能量',
+    question: ['如何讓產業與學界的能量，', '在一次捲動裡匯流、碰撞？'],
+  },
+  story: {
+    title: '讓故事持續：一組色塊，激發多變想像力',
+    scenes: [
+      { src: bScene0, name: '俯視 CRND', note: '從建築平面開場' },
+      { src: bScene1, name: '建築長出', note: '平面立起成量體' },
+      { src: bScene2, name: '轉向正面', note: '色塊帶出首屏' },
+      { src: bScene3, name: '翻轉成柱', note: '錯位、堆成階梯' },
+      { src: bScene4, name: '接球協作', note: '理念與使命三段' },
+      { src: bScene5, name: '同心環', note: '色塊環繞成圓' },
+      { src: bScene6, name: '穿越隧道', note: '進入計畫亮點' },
+    ],
+  },
+  keyVisual: {
+    title: 'Grow Beyond：產學共生，驅動創新未來',
+    keywords: ['取樣建築結構的多元色塊', '幾何的碰撞、變化與轉場', '捲動串連每一個段落'],
+  },
+  siteMap: {
+    // 標題裡的數字跟著縮圖張數自動變
+    title: (n: number) => `${n} 種多變結構，一路推進，打開創造力`,
+    shapes: [bShape00, bShape01, bShape02, bShape03, bShape04, bShape05, bShape06, bShape07, bShape08, bShape09, bShape10, bShape11],
+  },
+  // 開場影片：還在製作，src 先留 null（頁面顯示「製作中」）；檔案到了放進 assets 再填 src／poster
+  film: {
+    src: null as string | null,
+    poster: null as string | null,
+    title: '', // 影片標題（空白就不顯示）
+    subtitle: '',
+    duration: '',
+  },
+  live: { hint: '往下捲動看轉場、點上方重播開場' },
+  phone: {
+    title: '手機上，色塊轉場一樣完整',
+    desc: '改成單欄閱讀，捲動時的幾何轉場照樣播放。',
+  },
+};
 const PAD = 120; // 左右內距
 const TOP = 168; // 內頁內容起點（Header 下方）
 
@@ -189,6 +266,33 @@ const Shot = ({ src, w, h, pos = 'center' }: { src: string; w: number | string; 
     <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: pos, display: 'block' }} />
   </div>
 );
+
+// 循環動態：播放中的頁面自動靜音循環播放；縮圖／總覽顯示 poster 靜態圖
+const LoopShot = ({ src, webm, poster, w, h }: { src: string; webm?: string; poster: string; w: number | string; h: number }) => {
+  const active = useIsActivePage();
+  return (
+    <div
+      style={{
+        width: w,
+        height: h,
+        borderRadius: 12,
+        overflow: 'hidden',
+        background: c.card,
+        boxShadow: '0 0 0 1px rgba(0,0,0,.06), 0 12px 32px -12px rgba(0,0,0,.18)',
+        flex: 'none',
+      }}
+    >
+      {active ? (
+        <video poster={poster} autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}>
+          <source src={src} type="video/mp4" />
+          {webm && <source src={webm} type="video/webm" />}
+        </video>
+      ) : (
+        <img src={poster} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      )}
+    </div>
+  );
+};
 
 const Tag = ({ children }: { children: ReactNode }) => (
   <span
@@ -553,7 +657,7 @@ const Compare: Page = () => (
     </div>
     <div className="cn-rise" style={{ position: 'absolute', top: TOP + 176, left: PAD, right: PAD, display: 'flex', gap: 40, animationDelay: '160ms' }}>
       <MockupCard src={mockupStyle1} n="STYLE A" name="3D 微縮聚落" />
-      <MockupCard src={mockupStyle2} n="STYLE B" name="（待放入）" />
+      <MockupCard src={mockupStyle2} n="STYLE B" name={B.name} />
     </div>
     <PageNo />
   </Frame>
@@ -610,37 +714,105 @@ const PhoneDemo: Page = () => {
 
 
 // =====================================================================
-// Style B 預留頁：影片、電腦版 demo、手機版 demo（素材到了再換掉）
+// Style B 頁面：設計核心、捲動轉場分鏡、主視覺概念、網站架構、電腦版 demo、手機版 demo
+// 版面沿用 Style A 的同一套元件；文案都在檔案上方的 B 物件
 // =====================================================================
-const Slot = ({ label, style }: { label: string; style?: CSSProperties }) => (
-  <div
-    style={{
-      position: 'absolute',
-      border: `3px dashed ${c.rule}`,
-      borderRadius: 16,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'column',
-      gap: 16,
-      color: c.muted,
-      ...style,
-    }}
-  >
-    <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 28, letterSpacing: '.06em', color: 'var(--osd-accent)' }}>STYLE B</span>
-    <span style={{ fontSize: 40, fontWeight: 500 }}>{label}</span>
-  </div>
-);
-
-// Style B 的設計核心、主視覺概念、網站架構（跟 Style A 同一個順序，先佔位）
 const Style2Core: Page = () => (
   <Frame>
     <Header section="Style B・設計核心" />
     <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
       <Eyebrow>STYLE B | Design core</Eyebrow>
-      <Title size={72}>（概念標語待補）</Title>
+      <Title size={72}>{B.core.title}</Title>
+      <div
+        className="cn-rise"
+        style={{ position: 'relative', marginTop: 64, height: 560, borderRadius: 12, overflow: 'hidden', animationDelay: '160ms' }}
+      >
+        <img src={bCore} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 50%' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(20,24,32,.6)' }} />
+        <p
+          style={{
+            position: 'absolute',
+            inset: 0,
+            margin: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            color: '#fff',
+            fontSize: 48,
+            fontWeight: 500,
+            lineHeight: 1.6,
+          }}
+        >
+          {B.core.question[0]}
+          <br />
+          {B.core.question[1]}
+        </p>
+      </div>
     </div>
-    <Slot label="設計核心配圖待放入" style={{ top: TOP + 164, left: PAD, right: PAD, height: 560 }} />
+    <PageNo />
+  </Frame>
+);
+
+// 捲動轉場分鏡：B 沒有開場影片，改用 7 個轉場畫面＋一格說明（4 × 2）
+const SceneCard = ({ src, n, name, note }: { src: string; n: string; name: string; note: string }) => (
+  <figure style={{ margin: 0, minWidth: 0 }}>
+    <Shot src={src} w="100%" h={236} />
+    <figcaption style={{ marginTop: 16, display: 'flex', alignItems: 'baseline', gap: 12 }}>
+      <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 20, color: 'var(--osd-accent)' }}>{n}</span>
+      <span style={{ fontSize: 28, fontWeight: 700 }}>{name}</span>
+      <span style={{ fontSize: 22, color: c.muted }}>{note}</span>
+    </figcaption>
+  </figure>
+);
+
+const Style2Story: Page = () => (
+  <Frame>
+    <Header section="Style B・捲動轉場" />
+    <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
+      <Eyebrow>STYLE B | Scroll story</Eyebrow>
+      <Title size={56}>{B.story.title}</Title>
+    </div>
+    <div
+      className="cn-rise"
+      style={{
+        position: 'absolute',
+        top: TOP + 148,
+        left: PAD,
+        right: PAD,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        columnGap: 24,
+        rowGap: 36,
+        animationDelay: '120ms',
+      }}
+    >
+      {B.story.scenes.map((s, i) => (
+        <SceneCard key={s.name} src={s.src} n={String(i + 1).padStart(2, '0')} name={s.name} note={s.note} />
+      ))}
+      <div
+        style={{
+          height: 236,
+          borderRadius: 12,
+          background: 'var(--osd-text)',
+          color: '#fff',
+          padding: '0 36px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          gap: 12,
+        }}
+      >
+        <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 20, letterSpacing: '.06em', color: 'var(--osd-accent)' }}>
+          ONE TAKE
+        </span>
+        <span style={{ fontSize: 30, fontWeight: 700, lineHeight: 1.4 }}>
+          同一組色塊一路變形，
+          <br />
+          不換場景、不跳頁
+        </span>
+      </div>
+    </div>
     <PageNo />
   </Frame>
 );
@@ -650,52 +822,232 @@ const Style2KeyVisual: Page = () => (
     <Header section="Style B・主視覺概念" />
     <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
       <Eyebrow>Key visual</Eyebrow>
-      <Title size={56}>（主視覺標題待補）</Title>
+      <Title size={56}>{B.keyVisual.title}</Title>
     </div>
-    <Slot label="主視覺截圖與重點待放入" style={{ top: TOP + 148, left: PAD, right: PAD, bottom: 112 }} />
+    <div style={{ position: 'absolute', top: TOP + 148, left: PAD, right: PAD, display: 'flex', gap: 64, alignItems: 'center' }}>
+      <div className="cn-rise" style={{ animationDelay: '100ms' }}>
+        <LoopShot src={bIntroLoop} webm={bIntroLoopWebm} poster={bHero} w={1060} h={596} />
+      </div>
+      <div style={{ flex: 1, borderTop: `1px solid ${c.rule}` }}>
+        {B.keyVisual.keywords.map((k, i) => (
+          <Keyword key={k} n={String(i + 1).padStart(2, '0')}>
+            {k}
+          </Keyword>
+        ))}
+      </div>
+    </div>
     <PageNo />
   </Frame>
 );
 
+// 網站架構：色塊在不同段落的變化視角（4 × 3），數字跟著張數變
 const Style2SiteMap: Page = () => (
   <Frame>
     <Header section="Style B・網站架構" />
     <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
       <Eyebrow>Site map</Eyebrow>
-      <Title size={56}>（網站架構標題待補）</Title>
+      <Title size={56}>{B.siteMap.title(B.siteMap.shapes.length)}</Title>
     </div>
-    <Slot label="網站架構與配圖待放入" style={{ top: TOP + 148, left: PAD, right: PAD, bottom: 112 }} />
-    <PageNo />
-  </Frame>
-);
-
-const Style2Film: Page = () => (
-  <Frame>
-    <Header section="Style B・開場影片" />
-    <Slot label="開場影片待放入" style={{ top: TOP, left: PAD, right: PAD, bottom: 96 }} />
-    <PageNo />
-  </Frame>
-);
-
-const Style2Live: Page = () => (
-  <Frame>
-    <Header section="Style B・可操作網站原型" />
-    <Slot label="電腦版網站 demo 待放入" style={{ top: TOP, left: PAD, right: PAD, bottom: 96 }} />
-    <PageNo />
-  </Frame>
-);
-
-const Style2Phone: Page = () => (
-  <Frame>
-    <Header section="Style B・手機版" />
-    <div style={{ position: 'absolute', top: TOP, left: PAD, width: 760 }}>
-      <Eyebrow>Mobile</Eyebrow>
-      <Title size={56}>（標題待補）</Title>
+    <div
+      className="cn-rise"
+      style={{
+        position: 'absolute',
+        top: TOP + 148,
+        left: PAD,
+        right: PAD,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        gap: 20,
+        animationDelay: '120ms',
+      }}
+    >
+      {B.siteMap.shapes.map((src, i) => (
+        <div key={src} style={{ position: 'relative' }}>
+          <Shot src={src} w="100%" h={212} />
+          <span
+            style={{
+              position: 'absolute',
+              left: 12,
+              top: 12,
+              padding: '2px 10px',
+              borderRadius: 4,
+              background: 'rgba(255,255,255,.92)',
+              fontFamily: 'var(--osd-font-display)',
+              fontWeight: 700,
+              fontSize: 18,
+              color: 'var(--osd-accent)',
+            }}
+          >
+            {String(i + 1).padStart(2, '0')}
+          </span>
+        </div>
+      ))}
     </div>
-    <Slot label="手機版 demo 待放入" style={{ right: 360, top: (1080 - PHONE_H - 28) / 2, width: PHONE_W + 28, height: PHONE_H + 28, borderRadius: 64 }} />
     <PageNo />
   </Frame>
 );
+
+// 開場影片：B.film.src 有檔案就跟 A 一樣點擊播放；沒有就顯示「製作中」
+const Style2Film: Page = () => {
+  const active = useIsActivePage();
+  const [playing, setPlaying] = useState(false);
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    if (!active) {
+      ref.current?.pause();
+      setPlaying(false);
+    }
+  }, [active]);
+  const { src, poster, title, subtitle, duration } = B.film;
+  return (
+    <Frame style={{ background: '#000', color: '#fff' }}>
+      {src && active && playing ? (
+        <video
+          ref={ref}
+          src={src}
+          poster={poster ?? undefined}
+          controls
+          playsInline
+          autoPlay
+          onEnded={() => setPlaying(false)}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', background: '#000' }}
+        />
+      ) : (
+        <>
+          {poster && <img src={poster} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,.72) 100%)' }} />
+          <FrameLines />
+          <div style={{ position: 'absolute', top: 44, left: 120, fontSize: 22, color: 'rgba(255,255,255,.85)' }}>開場影片 — Intro film</div>
+          {duration && (
+            <div style={{ position: 'absolute', top: 44, right: 120, fontSize: 22, color: 'rgba(255,255,255,.85)', fontFamily: 'var(--osd-font-display)' }}>
+              {duration}
+            </div>
+          )}
+          {!src && (
+            <div
+              style={{
+                position: 'absolute',
+                left: 160,
+                right: 160,
+                top: 200,
+                bottom: 400,
+                border: '2px dashed rgba(255,255,255,.25)',
+                borderRadius: 16,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 36,
+                color: 'rgba(255,255,255,.5)',
+              }}
+            >
+              影片製作中，完成後放入
+            </div>
+          )}
+          <div style={{ position: 'absolute', left: 160, bottom: 168, maxWidth: 1240 }}>
+            <Eyebrow color="#fff">STYLE B | INTRO FILM</Eyebrow>
+            {title && <h2 style={{ margin: '16px 0 0', fontSize: 88, fontWeight: 700, lineHeight: 1.2 }}>{title}</h2>}
+            {subtitle && <p style={{ margin: '20px 0 0', fontSize: 30, lineHeight: 1.6, color: 'rgba(255,255,255,.9)' }}>{subtitle}</p>}
+          </div>
+          {src && (
+            <button
+              type="button"
+              onClick={() => setPlaying(true)}
+              style={{ position: 'absolute', right: 200, bottom: 176, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, background: 'none', border: 0, color: '#fff', cursor: 'pointer', fontFamily: 'inherit' }}
+            >
+              <span style={{ width: 136, height: 136, borderRadius: '50%', border: '2px solid rgba(255,255,255,.9)', background: 'rgba(0,0,0,.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 4.5v15l13-7.5z" fill="#fff" />
+                </svg>
+              </span>
+              <span style={{ fontSize: 24 }}>點擊播放</span>
+            </button>
+          )}
+        </>
+      )}
+    </Frame>
+  );
+};
+
+// 電腦版 demo：跟 A 同一個外框，播放中才載入 iframe
+const Style2Live: Page = () => {
+  const active = useIsActivePage();
+  return (
+    <Frame>
+      <div style={{ position: 'absolute', top: 44, left: PAD, right: PAD, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+        <div style={{ fontSize: 24 }}>
+          <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, color: 'var(--osd-accent)', letterSpacing: '.06em', marginRight: 16 }}>LIVE</span>
+          <span style={{ fontWeight: 700 }}>Style B 可操作網站原型</span>
+          <span style={{ color: c.muted, marginLeft: 16 }}>{B.live.hint}</span>
+        </div>
+        <a href={B.siteUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: 22, color: c.muted, textDecoration: 'none' }}>
+          {B.siteLabel} ↗
+        </a>
+      </div>
+      <div
+        style={{
+          position: 'absolute',
+          top: 104,
+          left: PAD,
+          right: PAD,
+          bottom: 56,
+          borderRadius: 16,
+          border: '3px solid var(--osd-text)',
+          overflow: 'hidden',
+          background: c.card,
+        }}
+      >
+        {active ? (
+          <iframe title="Style B 網站原型" src={B.siteUrl} style={{ width: '100%', height: '100%', border: 0, display: 'block' }} allow="autoplay; fullscreen" />
+        ) : (
+          <img src={bHero} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+        )}
+      </div>
+    </Frame>
+  );
+};
+
+const Style2Phone: Page = () => {
+  const active = useIsActivePage();
+  return (
+    <Frame>
+      <Header section="Style B・手機版" />
+      <div style={{ position: 'absolute', top: TOP, left: PAD, width: 760 }}>
+        <Eyebrow>Mobile</Eyebrow>
+        <Title size={56}>{B.phone.title}</Title>
+        <p className="cn-rise" style={{ margin: '32px 0 0', fontSize: 32, lineHeight: 1.6, color: c.muted, animationDelay: '120ms' }}>
+          {B.phone.desc}
+        </p>
+        <a href={B.siteUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 40, fontSize: 24, color: c.muted, textDecoration: 'none' }}>
+          <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, color: 'var(--osd-accent)', letterSpacing: '.06em', marginRight: 16 }}>LIVE</span>
+          {B.siteLabel} ↗
+        </a>
+      </div>
+      <div
+        style={{
+          position: 'absolute',
+          right: 360,
+          top: (1080 - PHONE_H - 28) / 2,
+          width: PHONE_W,
+          height: PHONE_H,
+          padding: 14,
+          borderRadius: 64,
+          background: '#111',
+          boxShadow: '0 0 0 2px #2a2d33, 0 40px 80px -24px rgba(0,0,0,.35)',
+          boxSizing: 'content-box',
+        }}
+      >
+        <div style={{ width: '100%', height: '100%', borderRadius: 50, overflow: 'hidden', background: c.card, position: 'relative' }}>
+          {active ? (
+            <iframe title="Style B 網站原型（手機版）" src={B.siteUrl} style={{ width: PHONE_W, height: PHONE_H, border: 0, display: 'block' }} allow="autoplay; fullscreen" />
+          ) : (
+            <img src={bPhone} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+          )}
+        </div>
+      </div>
+      <PageNo />
+    </Frame>
+  );
+};
 
 // =====================================================================
 // 08 上線前待確認
@@ -759,19 +1111,20 @@ const Closing: Page = () => (
 // ---------- 講稿（簡報者模式顯示，跟頁面一對一） ----------
 export const notes: (string | undefined)[] = [
   '大家好，今天來介紹國泰產研中心「共創聚落」的官網提案。簡報很短，重點會放在影片跟現場操作。',
-  '這次準備了兩種風格，先看兩款的電腦版首頁放在一起的樣子。接下來先介紹 A 款。',
+  '這次準備了兩種風格，左邊 A 款是 3D 微縮聚落，右邊 B 款是創意匯流。先介紹 A 款。',
   '客戶不希望寫實還原大樓，所以我們把園區做成一座小城市。想解決的問題就一個：讓企業、教授、學生在同一個畫面裡看見彼此。',
   '先看開場影片，大概 50 秒，全部是用網站本身的 3D 場景錄的。（點擊播放）',
   '主視覺就三件事：等角的小城市、白天夜晚會自動切換、七站一鏡到底逛完。細節等一下直接看影片。',
   '網站一共七站，每一站就是地圖上的一個鏡頭位置，滑一下就到下一站。',
   '接下來直接操作網站。先點一下畫面就能拖曳、滾動；要回簡報，點網站外面再按方向鍵。',
   '手機版一樣能操作，上面是地圖、下面是內容，用手指拖曳就能逛。',
-  '接下來介紹 B 款，先講它的設計核心。（待補）',
-  'B 款的開場影片。（待補）',
-  'B 款的主視覺概念。（待補）',
-  'B 款的網站架構。（待補）',
-  'B 款的網站 demo。（待補）',
-  'B 款的手機版。（待補）',
+  '接下來是 B 款「創意匯流」。B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。想回答的問題是：怎麼讓產業和學界的能量，在一次捲動裡匯流、碰撞。',
+  'B 款的開場影片。（影片製作中，完成後補上）',
+  '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，幾何的碰撞、變化與轉場，以及用捲動把每個段落串起來。',
+  '往下捲的時候，故事會一直延續：同一組色塊從建築平面開始，翻成階梯、繞成圓環，最後穿過隧道進到計畫亮點，中間不換場景。',
+  '這頁是色塊在不同段落的樣子，同一組色塊一路推進，變出十二種不同的結構。',
+  '直接操作看看。往下捲就能看到轉場，上方可以重播開場。要回簡報，點網站外面再按方向鍵。',
+  '手機版改成單欄，色塊轉場一樣會播放。',
   '以上，謝謝大家，歡迎提問。',
 ];
 
@@ -792,6 +1145,7 @@ export default [
   Style2Core,
   Style2Film,
   Style2KeyVisual,
+  Style2Story,
   Style2SiteMap,
   Style2Live,
   Style2Phone,
