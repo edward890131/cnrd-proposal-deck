@@ -49,7 +49,7 @@ import bShape10 from './assets/b-shape-10.jpg';
 import bShape11 from './assets/b-shape-11.jpg';
 import bPhone from './assets/b-phone.jpg'; // 手機版首頁截圖（393 寬 @2x）
 // Style B 網站：簡報第 14、15 頁直接嵌入正式網址，網站更新後簡報自動同步
-const B_SITE_URL = 'https://crnd-b.vercel.app/';
+const B_SITE_URL = 'https://cnrd-b.vercel.app/';
 
 // ---------- Design tokens（取自網站 hero-map.html 的 CSS 變數） ----------
 export const design: DesignSystem = {
@@ -81,7 +81,7 @@ const SITE_URL = 'https://cathay-rd-web.vercel.app/';
 const B = {
   name: '創意匯流', // 第 2 頁對比用的風格名稱
   siteUrl: B_SITE_URL,
-  siteLabel: 'crnd-b.vercel.app', // demo 頁右上角顯示的文字
+  siteLabel: 'cnrd-b.vercel.app', // demo 頁右上角顯示的文字
   core: {
     title: '從靈動結構出發，展現多元活力，匯聚改變的能量',
     question: ['如何讓產業與學界的能量，', '在一次捲動裡匯流、碰撞？'],
