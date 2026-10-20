@@ -94,7 +94,7 @@ const c = {
   chip: 'rgba(0,0,0,.06)',
 };
 
-const SITE_URL = 'https://cathay-rd-web.vercel.app/';
+const SITE_URL = 'https://cnrd-a.vercel.app/';
 
 // =====================================================================
 // Style B 文案（集中在這裡；設計稿更新時只改這一區＋替換 assets/b-*.jpg）
@@ -746,7 +746,7 @@ const LivePrototype: Page = () => {
           <span style={{ color: c.muted, marginLeft: 16 }}>拖曳轉地圖、滾輪換站</span>
         </div>
         <a href={SITE_URL} target="_blank" rel="noopener noreferrer" style={{ fontSize: 22, color: c.muted, textDecoration: 'none' }}>
-          cathay-rd-web.vercel.app ↗
+          cnrd-a.vercel.app ↗
         </a>
       </div>
       <div
@@ -819,7 +819,7 @@ const PhoneDemo: Page = () => {
         </p>
         <a href={SITE_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 40, fontSize: 24, color: c.muted, textDecoration: 'none' }}>
           <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, color: 'var(--osd-accent)', letterSpacing: '.06em', marginRight: 16 }}>LIVE</span>
-          cathay-rd-web.vercel.app ↗
+          cnrd-a.vercel.app ↗
         </a>
       </div>
       {/* 手機外框：黑色機身＋圓角螢幕 */}
