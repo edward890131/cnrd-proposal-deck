@@ -1,4 +1,4 @@
-// CNRD 共創聚落官網提案簡報 — 2026-10-19 兩款合併版，共 16 頁（封面、兩款對比、Style A 六頁、Style B 七頁〔依初稿 v68〕、結尾）
+// CNRD 共創聚落官網提案簡報 — 兩款合併版，共 21 頁（封面、兩款對比、Style A 七頁、Style B 十一頁〔含色彩概念三頁〕、結尾）
 // 細節交給開場影片與現場 demo，簡報只留概念、影片、架構、設計系統、待確認事項
 // 版面：1920 × 1080 畫布；內頁共用 Header（CNRD＋章節）＋右下頁碼；封面與結尾用夜晚城市滿版首尾呼應
 import {
@@ -47,6 +47,13 @@ import bShape09 from './assets/b-shape-09.jpg';
 import bShape10 from './assets/b-shape-10.jpg';
 import bShape11 from './assets/b-shape-11.jpg';
 import bPhone from './assets/b-phone.jpg'; // 手機版首頁截圖（393 寬 @2x）
+// 色彩概念：情境照（Unsplash，使用者提供的色彩資料包）
+import bColorHands from './assets/b-color-hands.jpg'; // 多隻手疊在一起
+import bColorBlue from './assets/b-color-blue.jpg'; // 光纖
+import bColorOrange from './assets/b-color-orange.jpg'; // 夕陽跳躍
+import bColorYellow from './assets/b-color-yellow.jpg'; // 燈泡
+import bColorPink from './assets/b-color-pink.jpg'; // 伸手相連
+import bColorMono from './assets/b-color-mono.jpg'; // 尺與筆
 // Style B 網站：簡報第 14、15 頁直接嵌入正式網址，網站更新後簡報自動同步
 const B_SITE_URL = 'https://cnrd-b.vercel.app/';
 
@@ -85,6 +92,26 @@ const B = {
     title: '從靈動結構出發，展現多元活力，匯聚改變的能量',
     statement: ['抽象示意能量的碰撞，', '以更前瞻的視角訴說品牌精神'],
     textLeft: 900, // 文字在框內的起始 x（對齊色塊圖中間的留白）
+  },
+  // 色彩概念（三頁）：色值取自 B 網站 index.html 的 CSS 變數
+  color: {
+    concept: {
+      title: 'Different Minds, Shared Possibilities.',
+      body: [
+        '以多元而鮮明的色彩，象徵不同領域、角色與觀點的獨特性。',
+        '這些色彩不追求一致，而是在交流、碰撞與組合中，形成新的關係與可能。',
+        '如同產學合作本身，差異並非阻礙，而是創造共創價值的起點。',
+      ],
+      keywords: ['Diversity', 'Interaction', 'Possibility'],
+    },
+    roles: {
+      title: '色彩系統 — 多元活潑的能量',
+      desc: ['每一種色彩都帶有不同的情緒與能量，對應產學合作中多元角色與推動力。', '它們各自鮮明，卻能在同一套系統中形成平衡與節奏。'],
+    },
+    breaking: {
+      title: 'Breaking the Conventional',
+      body: '高彩度配色建立出更開放、年輕且具有實驗性的品牌氣質。它不只是傳達專業，更回應了產學合作所需要的流動性、交流性與未來性。',
+    },
   },
   story: {
     title: '讓故事持續：一組色塊，激發多變想像力',
@@ -796,6 +823,204 @@ const Style2Core: Page = () => (
   </Frame>
 );
 
+// ---------- 色彩概念（三頁，接在設計核心之後） ----------
+// B 網站的色票（index.html 的 --blue / --orange / --yellow / --pink / --ink / --paper）
+const bc = {
+  blue: '#478BF8',
+  orange: '#FF8148',
+  yellow: '#FAFF00',
+  pink: '#FFBDF8',
+  ink: '#111111',
+  paper: '#FFFFFF',
+};
+
+// 色彩概念 1：一句話＋手疊在一起的情境照＋三個關鍵字
+const ConceptKeyword = ({ n, children }: { n: string; children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'baseline', gap: 20, padding: '18px 0', borderBottom: `1px solid ${c.rule}` }}>
+    <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 22, color: 'var(--osd-accent)' }}>{n}</span>
+    <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 600, fontSize: 32 }}>{children}</span>
+  </div>
+);
+
+const Style2ColorConcept: Page = () => (
+  <Frame>
+    <Header section="Style B・色彩概念" />
+    <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
+      <Eyebrow>Color concept</Eyebrow>
+      <Title size={56}>{B.color.concept.title}</Title>
+    </div>
+    <div style={{ position: 'absolute', top: TOP + 148, left: PAD, right: PAD, display: 'flex', gap: 64 }}>
+      <div className="cn-rise" style={{ animationDelay: '100ms' }}>
+        <Shot src={bColorHands} w={1060} h={596} />
+      </div>
+      <div style={{ flex: 1, height: 596, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div className="cn-rise" style={{ display: 'flex', flexDirection: 'column', gap: 16, animationDelay: '160ms' }}>
+          <p style={{ margin: 0, fontSize: 28, lineHeight: 1.7, color: c.muted }}>{B.color.concept.body[0]}</p>
+          <p style={{ margin: 0, fontSize: 28, lineHeight: 1.7, color: c.muted }}>{B.color.concept.body[1]}</p>
+          <p style={{ margin: 0, fontSize: 28, lineHeight: 1.7, color: c.muted }}>{B.color.concept.body[2]}</p>
+        </div>
+        <div style={{ borderTop: `1px solid ${c.rule}` }}>
+          <ConceptKeyword n="01">{B.color.concept.keywords[0]}</ConceptKeyword>
+          <ConceptKeyword n="02">{B.color.concept.keywords[1]}</ConceptKeyword>
+          <ConceptKeyword n="03">{B.color.concept.keywords[2]}</ConceptKeyword>
+        </div>
+      </div>
+    </div>
+    <PageNo />
+  </Frame>
+);
+
+// 色彩概念 2：五個色彩欄位（情境照＋色票＋三個關鍵字＋一句說明）
+const ColorRole = ({
+  src,
+  swatch,
+  name,
+  hex,
+  keywords,
+  desc,
+}: {
+  src: string;
+  swatch: string; // CSS background（黑白用斜切雙色）
+  name: string;
+  hex: string;
+  keywords: [string, string, string];
+  desc: string;
+}) => (
+  <div style={{ flex: 1, minWidth: 0 }}>
+    <Shot src={src} w="100%" h={200} />
+    <div style={{ marginTop: 24, display: 'flex', alignItems: 'center', gap: 14 }}>
+      <span style={{ width: 36, height: 36, borderRadius: 6, background: swatch, boxShadow: 'inset 0 0 0 1px rgba(0,0,0,.12)', flex: 'none' }} />
+      <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 26 }}>{name}</span>
+      <span style={{ marginLeft: 'auto', fontFamily: 'var(--osd-font-display)', fontSize: 16, color: c.muted }}>{hex}</span>
+    </div>
+    <div
+      style={{
+        marginTop: 16,
+        paddingTop: 16,
+        borderTop: `1px solid ${c.rule}`,
+        fontFamily: 'var(--osd-font-display)',
+        fontWeight: 600,
+        fontSize: 18,
+        lineHeight: 1.6,
+        letterSpacing: '.04em',
+        textTransform: 'uppercase',
+      }}
+    >
+      {keywords[0]}
+      <br />
+      {keywords[1]}
+      <br />
+      {keywords[2]}
+    </div>
+    <p style={{ margin: '16px 0 0', fontSize: 26, lineHeight: 1.6, color: c.muted }}>{desc}</p>
+  </div>
+);
+
+const Style2ColorRoles: Page = () => (
+  <Frame>
+    <Header section="Style B・色彩系統" />
+    <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
+      <Eyebrow>Color roles</Eyebrow>
+      <Title size={56}>{B.color.roles.title}</Title>
+      <p className="cn-rise" style={{ margin: '20px 0 0', fontSize: 28, lineHeight: 1.6, color: c.muted, animationDelay: '100ms' }}>
+        {B.color.roles.desc[0]}
+        <br />
+        {B.color.roles.desc[1]}
+      </p>
+    </div>
+    <div
+      className="cn-rise"
+      style={{ position: 'absolute', top: TOP + 268, left: PAD, right: PAD, display: 'flex', gap: 28, animationDelay: '160ms' }}
+    >
+      <ColorRole
+        src={bColorBlue}
+        swatch={bc.blue}
+        name="Blue"
+        hex={bc.blue}
+        keywords={['Technology', 'Space', 'Exploration']}
+        desc="延續科技與專業的聯想，明亮的藍更具未來感。"
+      />
+      <ColorRole
+        src={bColorOrange}
+        swatch={bc.orange}
+        name="Orange"
+        hex={bc.orange}
+        keywords={['Action', 'Energy', 'Transformation']}
+        desc="代表研究成果由概念走向實踐，注入溫度與行動感。"
+      />
+      <ColorRole
+        src={bColorYellow}
+        swatch={bc.yellow}
+        name="Yellow"
+        hex={bc.yellow}
+        keywords={['Ideas', 'Curiosity', 'Possibility']}
+        desc="象徵靈感與新想法的誕生，扮演啟發的角色。"
+      />
+      <ColorRole
+        src={bColorPink}
+        swatch={bc.pink}
+        name="Pink"
+        hex={bc.pink}
+        keywords={['Connection', 'Humanity', 'Co-creation']}
+        desc="帶入交流與共創的情感，串起人與人的連結。"
+      />
+      <ColorRole
+        src={bColorMono}
+        swatch={`linear-gradient(135deg, ${bc.ink} 50%, ${bc.paper} 50%)`}
+        name="Black / White"
+        hex=""
+        keywords={['Clarity', 'Structure', 'Balance']}
+        desc="提供清楚的資訊結構與閱讀基礎，搭配圖片塑造氛圍。"
+      />
+    </div>
+    <PageNo />
+  </Frame>
+);
+
+// 色彩概念 3：打破常規（左：標題＋說明＋色塊並置；右：三個重點）
+const BreakPoint = ({ n, title, children }: { n: string; title: string; children: ReactNode }) => (
+  <div style={{ display: 'flex', gap: 28, padding: '40px 0', borderBottom: `1px solid ${c.rule}` }}>
+    <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 28, color: 'var(--osd-accent)', lineHeight: 1.3 }}>{n}</span>
+    <div>
+      <h3 style={{ margin: 0, fontSize: 36, fontWeight: 700, lineHeight: 1.3 }}>{title}</h3>
+      <p style={{ margin: '12px 0 0', fontSize: 28, lineHeight: 1.6, color: c.muted }}>{children}</p>
+    </div>
+  </div>
+);
+
+const Style2ColorBreaking: Page = () => (
+  <Frame>
+    <Header section="Style B・色彩策略" />
+    <div style={{ position: 'absolute', top: TOP, left: PAD, width: 640 }}>
+      <Eyebrow>Color strategy</Eyebrow>
+      <Title size={64}>{B.color.breaking.title}</Title>
+      <p className="cn-rise" style={{ margin: '28px 0 0', fontSize: 28, lineHeight: 1.7, color: c.muted, animationDelay: '100ms' }}>
+        {B.color.breaking.body}
+      </p>
+    </div>
+    {/* 五色並置：大小不一的色塊互相疊合，示意「排列、並置與組合」 */}
+    <div className="cn-rise" style={{ position: 'absolute', left: PAD, bottom: 112, width: 640, height: 260, animationDelay: '220ms' }}>
+      <div style={{ position: 'absolute', left: 0, top: 40, width: 250, height: 220, background: bc.blue }} />
+      <div style={{ position: 'absolute', left: 190, top: 0, width: 190, height: 150, background: bc.yellow }} />
+      <div style={{ position: 'absolute', left: 300, top: 110, width: 210, height: 150, background: bc.orange }} />
+      <div style={{ position: 'absolute', left: 440, top: 20, width: 140, height: 120, background: bc.pink }} />
+      <div style={{ position: 'absolute', left: 580, top: 140, width: 60, height: 120, background: bc.ink }} />
+    </div>
+    <div style={{ position: 'absolute', top: TOP - 8, left: PAD + 640 + 96, right: PAD, borderTop: `1px solid ${c.rule}` }}>
+      <BreakPoint n="01" title="差異中的整體">
+        不同色彩保有鮮明個性，卻能透過排列、並置與組合形成整體，呼應產、學、研究與人才之間的互補關係。
+      </BreakPoint>
+      <BreakPoint n="02" title="重塑研究與創新的形象">
+        跳脫傳統機構網站偏冷靜、保守的配色印象，以更鮮明的色彩語言重塑研究與創新的形象。
+      </BreakPoint>
+      <BreakPoint n="03" title="一致且可擴展的系統">
+        不只用於主視覺，也延伸到幾何動畫、網站介面、資訊層級與提案影片，形成一致且可擴展的視覺系統。
+      </BreakPoint>
+    </div>
+    <PageNo />
+  </Frame>
+);
+
 // 捲動轉場：三組代表性的色塊組合（場域／人才／產業推動）
 const Style2Story: Page = () => (
   <Frame>
@@ -1159,6 +1384,9 @@ export const notes: (string | undefined)[] = [
   '手機版一樣能操作，上面是地圖、下面是內容，用手指拖曳就能逛。',
   '接下來是 B 款「創意匯流」，先看它的首頁在電腦上的樣子。',
   'B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
+  'B 款的色彩概念是 Different Minds, Shared Possibilities。用多元鮮明的色彩象徵不同領域、角色與觀點，色彩不追求一致，而是在交流和碰撞中形成新的可能。就像產學合作，差異是共創價值的起點。',
+  '色彩系統有五組：藍色代表科技與探索，橘色代表行動與轉化，黃色代表靈感與好奇，粉色代表連結與共創，黑白則提供清楚的資訊結構。各自鮮明，卻能在同一套系統裡取得平衡。',
+  '這套高彩度配色刻意打破傳統機構網站的保守印象。三個重點：差異中形成整體、重塑研究與創新的形象，以及能延伸到動畫、介面和影片的一致系統。',
   '來看 B 款的概念影片，大約 44 秒。從色彩、形狀到動態，看這組色塊怎麼一路組成整個網站。（點擊播放）',
   '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，幾何的碰撞、變化與轉場，以及用捲動把每個段落串起來。',
   '往下捲的時候，故事會一直延續。同一組色塊會組合成不同的結構，分別代表場域、人才和產業推動。',
@@ -1185,6 +1413,9 @@ export default [
   PhoneDemo,
   Style2Cover,
   Style2Core,
+  Style2ColorConcept,
+  Style2ColorRoles,
+  Style2ColorBreaking,
   Style2Film,
   Style2KeyVisual,
   Style2Story,
