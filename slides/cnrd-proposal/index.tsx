@@ -1,4 +1,4 @@
-// CNRD 共創聚落官網提案簡報 — 2026-10-19 兩款合併版，共 16 頁（封面、兩款對比、Style A 六頁、Style B 七頁〔依初稿 v68〕、結尾）
+// CNRD 共創聚落官網提案簡報 — 兩款合併版，共 22 頁（封面、兩款對比、Style A 九頁、Style B 十頁〔含品牌色彩兩頁〕、結尾）
 // 細節交給開場影片與現場 demo，簡報只留概念、影片、架構、設計系統、待確認事項
 // 版面：1920 × 1080 畫布；內頁共用 Header（CNRD＋章節）＋右下頁碼；封面與結尾用夜晚城市滿版首尾呼應
 import {
@@ -63,6 +63,13 @@ import bShape09 from './assets/b-shape-09.jpg';
 import bShape10 from './assets/b-shape-10.jpg';
 import bShape11 from './assets/b-shape-11.jpg';
 import bPhone from './assets/b-phone.jpg'; // 手機版首頁截圖（393 寬 @2x）
+// 色彩概念：情境照（Unsplash，使用者提供的色彩資料包）
+import bColorHands from './assets/b-color-hands.jpg'; // 多隻手疊在一起（橫幅 1060×360 @2x）
+import bColorBlue from './assets/b-color-blue.jpg'; // 仰視大樓
+import bColorOrange from './assets/b-color-orange.jpg'; // 夕陽跳躍
+import bColorYellow from './assets/b-color-yellow.jpg'; // 燈泡
+import bColorPink from './assets/b-color-pink.jpg'; // 伸手相連
+import bColorMono from './assets/b-color-mono.jpg'; // 尺與筆
 // Style B 網站：簡報第 14、15 頁直接嵌入正式網址，網站更新後簡報自動同步
 const B_SITE_URL = 'https://cnrd-b.vercel.app/';
 
@@ -102,6 +109,19 @@ const B = {
     statement: ['抽象示意能量的碰撞，', '以更前瞻的視角訴說品牌精神'],
     textLeft: 900, // 文字在框內的起始 x（對齊色塊圖中間的留白）
   },
+  // 色彩概念（三頁）：文案照 Figma「color system」（國泰產研_前台視覺提案 node 385:3172）
+  color: {
+    concept: {
+      title: ['Different Minds,', 'Shared Possibilities.'],
+      body: ['不同領域、專業與觀點，各自保有鮮明的個性。', '透過交流、碰撞與組合，讓差異成為共創的起點。'],
+      keywords: [
+        { en: 'Diversity', zh: '多元共存' },
+        { en: 'Interaction', zh: '交流碰撞' },
+        { en: 'Possibility', zh: '創造可能' },
+      ],
+    },
+    roles: { title: ['色彩系統：', '多元活潑的能量'] },
+  },
   story: {
     title: '讓故事持續：一組色塊，激發多變想像力',
     // 代表性色塊組合（來源：Figma「結構概念」）
@@ -113,7 +133,7 @@ const B = {
   },
   keyVisual: {
     title: 'Grow Beyond：產學共生，驅動創新未來',
-    keywords: ['取樣建築結構的多元色塊', '幾何的碰撞、變化與轉場', '捲動串連每一個段落'],
+    keywords: ['取樣建築結構的多元色塊', '象徵人才能量\n源源不絕的匯集', '幾何變化串連每一個段落'],
   },
   siteMap: {
     // 標題裡的數字跟著縮圖張數自動變
@@ -419,7 +439,7 @@ const DesignCore: Page = () => (
 const Keyword = ({ n, children }: { n: string; children: ReactNode }) => (
   <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, padding: '36px 0', borderBottom: `1px solid ${c.rule}` }}>
     <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 28, color: 'var(--osd-accent)' }}>{n}</span>
-    <span style={{ fontSize: 44, fontWeight: 700, lineHeight: 1.3 }}>{children}</span>
+    <span style={{ fontSize: 44, fontWeight: 700, lineHeight: 1.3, whiteSpace: 'pre-line' }}>{children}</span>
   </div>
 );
 
@@ -893,6 +913,137 @@ const Style2Core: Page = () => (
   </Frame>
 );
 
+// ---------- 色彩概念（三頁，接在設計核心之後） ----------
+// 版面照 Figma「color system」三個 frame；頁首、小標、細線、編號換成簡報共用樣式
+// 色值照 Figma（與 B 網站 CSS 只差一點點）
+const bc = {
+  blue: '#478AFA',
+  orange: '#FF813F',
+  yellow: '#F5ED00',
+  pink: '#F5A5E8',
+  pinkShape: '#FFBDF8', // 第 1 頁扇形用的淺粉
+  ink: '#171717',
+};
+
+// 第 1 頁右側的幾何構圖（Figma 座標，整組右移 40px、下移 100px 對齊簡報版面）
+const ColorShapes = () => (
+  <svg
+    className="cn-rise"
+    width={1920}
+    height={1080}
+    viewBox="0 0 1920 1080"
+    style={{ position: 'absolute', inset: 0, pointerEvents: 'none', animationDelay: '160ms' }}
+    aria-hidden
+  >
+    <g transform="translate(40 100)">
+      <circle cx={1694.5} cy={329.5} r={31.5} fill={bc.ink} />
+      <circle cx={1487.5} cy={440.6} r={116.7} fill={bc.yellow} />
+      <rect x={1236} y={239} width={182.5} height={182.5} rx={8} fill={bc.blue} />
+      <path d="M 1470 637.5 L 1367.9 609.2 A 106 106 0 0 1 1502.9 536.7 Z" fill={bc.pinkShape} />
+      <path d="M 1547.5 411.7 A 122.8 122.8 0 1 1 1671.2 623.9 L 1643.0 574.1 A 65.6 65.6 0 1 0 1576.9 460.8 Z" fill={bc.orange} />
+    </g>
+  </svg>
+);
+
+const ConceptKeyword = ({ n, en, zh }: { n: string; en: string; zh: string }) => (
+  <div style={{ width: 576, display: 'flex', gap: 24, alignItems: 'baseline' }}>
+    <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 24, color: 'var(--osd-accent)' }}>{n}</span>
+    <div>
+      <div style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 34, textTransform: 'uppercase', letterSpacing: '.02em' }}>{en}</div>
+      <div style={{ marginTop: 12, fontSize: 28, fontWeight: 700 }}>{zh}</div>
+    </div>
+  </div>
+);
+
+const Style2ColorConcept: Page = () => (
+  <Frame>
+    <Header section="Style B・品牌色彩" />
+    <div style={{ position: 'absolute', top: TOP, left: PAD }}>
+      <Eyebrow>Color concept</Eyebrow>
+      <Title size={56}>{B.color.concept.title.join(' ')}</Title>
+    </div>
+    <ColorShapes />
+    <p className="cn-rise" style={{ position: 'absolute', top: TOP + 132, left: PAD, margin: 0, fontSize: 30, lineHeight: 1.55, animationDelay: '100ms' }}>
+      {B.color.concept.body[0]}
+      <br />
+      {B.color.concept.body[1]}
+    </p>
+    {/* 手疊在一起的情境照，放在說明與關鍵字之間 */}
+    <div className="cn-rise" style={{ position: 'absolute', top: 432, left: PAD, animationDelay: '140ms' }}>
+      <Shot src={bColorHands} w={1060} h={360} />
+    </div>
+    <div style={{ position: 'absolute', top: 829, left: PAD, right: PAD, height: 1, background: c.rule }} />
+    <div className="cn-rise" style={{ position: 'absolute', top: 868, left: PAD, right: PAD, display: 'flex', animationDelay: '200ms' }}>
+      <ConceptKeyword n="01" en={B.color.concept.keywords[0].en} zh={B.color.concept.keywords[0].zh} />
+      <ConceptKeyword n="02" en={B.color.concept.keywords[1].en} zh={B.color.concept.keywords[1].zh} />
+      <ConceptKeyword n="03" en={B.color.concept.keywords[2].en} zh={B.color.concept.keywords[2].zh} />
+    </div>
+    <PageNo />
+  </Frame>
+);
+
+// 第 2 頁：色票網格（結構同 A 款品牌色彩頁）— 上排色塊、下排配圖，每欄一個顏色
+const B_COLORS: { en: string; zh: string; tag: string; hex: string; img: string; light?: boolean }[] = [
+  { en: 'Blue', zh: '科技、場域與探索', tag: 'Knowledge / Exploration', hex: bc.blue, img: bColorBlue },
+  { en: 'Orange', zh: '實踐、能量與轉化', tag: 'Action / Transformation', hex: bc.orange, img: bColorOrange },
+  { en: 'Yellow', zh: '靈感、好奇與可能', tag: 'Ideas / Possibility', hex: bc.yellow, img: bColorYellow, light: true },
+  { en: 'Pink', zh: '交流、溫度與共創', tag: 'Connection / Co-creation', hex: bc.pink, img: bColorPink, light: true },
+  { en: 'Black / White', zh: '秩序、平衡與閱讀', tag: 'Clarity / Structure', hex: bc.ink, img: bColorMono },
+];
+// 色塊：上方左右放 hex／RGB，下方中文、英文名（大）、英文關鍵字（字級同 A 款 ColorTile）
+const BColorTile = ({ c }: { c: (typeof B_COLORS)[number] }) => {
+  const ink = c.light ? '#1f2328' : '#fff';
+  return (
+    <div style={{ background: c.hex, color: ink, padding: 28, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--osd-font-display)', fontSize: 12, opacity: 0.8 }}>
+        <span>{c.hex}</span>
+        <span style={{ whiteSpace: 'pre' }}>{rgbOf(c.hex)}</span>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.45 }}>{c.zh}</div>
+          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 32, fontWeight: 600, letterSpacing: '-0.04em', lineHeight: 1.25 }}>{c.en}</div>
+        </div>
+        <p style={{ margin: 0, fontSize: 15, lineHeight: 1.45, opacity: 0.8 }}>{c.tag}</p>
+      </div>
+    </div>
+  );
+};
+
+const Style2ColorRoles: Page = () => (
+  <Frame>
+    <Header section="Style B・品牌色彩" />
+    <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
+      <Eyebrow>Color roles</Eyebrow>
+      <Title size={56}>{B.color.roles.title.join('')}</Title>
+    </div>
+    <div
+      className="cn-rise"
+      style={{
+        position: 'absolute',
+        top: TOP + 148,
+        left: PAD,
+        right: PAD,
+        bottom: 96,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gridTemplateRows: 'repeat(2, 1fr)',
+        gridAutoFlow: 'column',
+        borderRadius: 12,
+        overflow: 'hidden',
+        boxShadow: '0 0 0 1px rgba(0,0,0,.06)',
+        animationDelay: '120ms',
+      }}
+    >
+      {B_COLORS.flatMap((col) => [
+        <BColorTile key={col.en} c={col} />,
+        <div key={col.en + 'i'} style={{ background: `${col.hex} url(${col.img}) center / cover no-repeat` }} />,
+      ])}
+    </div>
+    <PageNo />
+  </Frame>
+);
+
 // 捲動轉場：三組代表性的色塊組合（場域／人才／產業推動）
 const Style2Story: Page = () => (
   <Frame>
@@ -1259,7 +1410,9 @@ export const notes: (string | undefined)[] = [
   '接下來是 B 款「創意匯流」，先看它的首頁在電腦上的樣子。',
   'B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
   '來看 B 款的概念影片，大約 44 秒。從色彩、形狀到動態，看這組色塊怎麼一路組成整個網站。（點擊播放）',
-  '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，幾何的碰撞、變化與轉場，以及用捲動把每個段落串起來。',
+  '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，象徵人才能量源源不絕的匯集，以及用幾何變化把每個段落串起來。',
+  'B 款的色彩概念是 Different Minds, Shared Possibilities。不同領域、專業與觀點，各自保有鮮明的個性，透過交流、碰撞與組合，讓差異成為共創的起點。三個關鍵字：多元共存、交流碰撞、創造可能。',
+  '色彩系統有五組：藍色代表科技、場域與探索，橘色是實踐、能量與轉化，黃色是靈感、好奇與可能，粉色是交流、溫度與共創，黑白則負責秩序、平衡與閱讀。',
   '往下捲的時候，故事會一直延續。同一組色塊會組合成不同的結構，分別代表場域、人才和產業推動。',
   '這頁是色塊在不同段落的樣子，同一組色塊一路推進，變出十二種不同的結構。',
   '直接操作看看。往下捲就能看到轉場，上方可以重播開場。要回簡報，點網站外面再按方向鍵。',
@@ -1288,6 +1441,8 @@ export default [
   Style2Core,
   Style2Film,
   Style2KeyVisual,
+  Style2ColorConcept,
+  Style2ColorRoles,
   Style2Story,
   Style2SiteMap,
   Style2Live,
