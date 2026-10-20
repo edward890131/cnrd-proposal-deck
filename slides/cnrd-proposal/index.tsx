@@ -13,6 +13,7 @@ import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from 
 
 // ---------- 素材（網站真實畫面，2026-10-16 從正式網址重新截取） ----------
 import cityDay from './assets/city-day.jpg';
+import sitemapCowork from './assets/sitemap-cowork.jpg'; // 網站架構頁配圖：跨院系研發中心討論區特寫（網站重截，3360×960）
 import sitemapNight from './assets/sitemap-night.jpg'; // 網站架構頁：夜晚、正上方俯視、廣場置中（直接用橫幅比例 1680×480 @2x 截）
 import heroDay from './assets/hero-day.jpg'; // 首屏白天（2026-10-20 正式網站，2880×1620）
 import heroNight from './assets/hero-night.jpg'; // 首屏夜晚（同上）
@@ -24,6 +25,21 @@ import mockupStyle2 from './assets/mockup-style2.jpg'; // MacBook Pro 情境照�
 import phoneHome from './assets/phone-home.jpg'; // 手機版首頁截圖（非播放中的縮圖用）
 
 // ---------- Style B 素材（2026-10-19 從初稿「CRND 首屏投影 v68」截取） ----------
+// A 款色彩頁配圖：網站 3D 地圖放大截圖（2026-10-20）；空間場景頁：8 個場景單獨渲染、去背
+import aColorOrange from './assets/a-color-orange.jpg';
+import aColorBlue from './assets/a-color-blue.jpg';
+import aColorGreen from './assets/a-color-green.jpg';
+import aColorBrown from './assets/a-color-brown.jpg';
+import aColorWhite from './assets/a-color-white.jpg';
+import aColorBlack from './assets/a-color-black.jpg';
+import aSceneOffice from './assets/a-scene-office.png';
+import aSceneCowork from './assets/a-scene-cowork.png';
+import aSceneExchange from './assets/a-scene-exchange.png';
+import aSceneShop from './assets/a-scene-shop.png';
+import aScenePlazaA from './assets/a-scene-plaza-a.png';
+import aScenePlazaB from './assets/a-scene-plaza-b.png';
+import aSceneTower from './assets/a-scene-tower.png';
+import aSceneUniversity from './assets/a-scene-university.png';
 import aCover from './assets/a-cover.jpg'; // A 款開場：滿版 MacBook 情境圖（CNRD_city.png 裁成 16:9）
 import bCover from './assets/b-cover.jpg'; // B 款開場：滿版 MacBook 情境圖
 import bHero from './assets/b-hero.jpg'; // 首屏 Grow Beyond
@@ -583,6 +599,83 @@ const Station = ({ n, name }: { n: string; name: string }) => (
   </div>
 );
 
+// =====================================================================
+// A 款色彩：6 個品牌色系，色塊與地圖特寫交錯排成棋盤（4 欄 × 3 列，參考 Pantone 色票卡）
+// =====================================================================
+const A_COLORS: { name: string; en: string; hex: string; line: string; img: string; pos?: string; light?: boolean }[] = [
+  { name: '活力橘', en: 'Vibrant Orange', hex: '#FB5B1A', line: '孕育共創而生的豐沛活力，亮眼且有自信', img: aColorOrange, pos: '50% 58%' },
+  { name: '智慧藍', en: 'Smart Blue', hex: '#1F6FD6', line: '科技與研發的通透感受，理性卻不失親切', img: aColorBlue, pos: '50% 40%' },
+  { name: '共創綠', en: 'Co-creation Green', hex: '#4BB04F', line: '搭建人才休憩交流的綠地，都市中的綠洲', img: aColorGreen, pos: '50% 45%' },
+  { name: '溫暖棕', en: 'Warm Brown', hex: '#A8754A', line: '營造材質的實景物件，為聚落增添生活感', img: aColorBrown, pos: '50% 35%' },
+  { name: '純淨白', en: 'Pure White', hex: '#FFFFFF', line: '乾淨明亮的城市印象，富現代感充滿願景', img: aColorWhite, pos: '50% 40%', light: true },
+  { name: '寧靜黑', en: 'Calm Black', hex: '#0E1118', line: '入夜後的城市與街道，襯托希望更加閃耀', img: aColorBlack, pos: '50% 50%' },
+];
+const rgbOf = (hex: string) => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)).join('  ');
+// 色塊：照 Figma 定稿（活力橘那格）— 上方左右放 hex／RGB，下方中文名、英文名（大）、描述
+const ColorTile = ({ c }: { c: (typeof A_COLORS)[number]; n: number }) => {
+  const ink = c.light ? '#1f2328' : '#fff';
+  return (
+    <div style={{ background: c.hex, color: ink, padding: 28, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: c.light ? 'inset 0 0 0 1px #e3e5e9' : undefined }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--osd-font-display)', fontSize: 12, opacity: 0.8 }}>
+        <span>{c.hex}</span><span style={{ whiteSpace: 'pre' }}>{rgbOf(c.hex)}</span>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.45 }}>{c.name}</div>
+          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 32, fontWeight: 600, letterSpacing: '-0.04em', lineHeight: 1.25 }}>{c.en}</div>
+        </div>
+        <p style={{ margin: 0, fontSize: 15, lineHeight: 1.45, opacity: 0.8 }}>{c.line}</p>
+      </div>
+    </div>
+  );
+};
+const ImageTile = ({ c }: { c: (typeof A_COLORS)[number] }) => (
+  <div style={{ background: `${c.hex} url(${c.img}) center / cover no-repeat` }} />   // 配圖：Figma 定稿（淡色底＋3D 物件），420×270 比例
+);
+const AColor: Page = () => (
+  // 每列兩組「色塊＋配圖」，三列對齊不交錯；外圍留跟其他頁一樣的邊距
+  <Frame>
+    <Header section="品牌色彩" />
+    <div className="cn-rise" style={{ position: 'absolute', top: TOP, left: PAD, right: PAD, bottom: 96, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gridTemplateRows: 'repeat(3, 1fr)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 0 0 1px rgba(0,0,0,.06)' }}>
+      {A_COLORS.flatMap((col, i) => [<ColorTile key={col.hex} c={col} n={i + 1} />, <ImageTile key={col.hex + 'i'} c={col} />])}
+    </div>
+    <PageNo />
+  </Frame>
+);
+
+// =====================================================================
+// A 款空間場景：8 個 3D 場景一次排開（4 × 2），每個配一句說明
+// =====================================================================
+const A_SCENES: [string, string, string][] = [
+  [aSceneOffice, '辦公研發空間', '企業進駐的獨立辦公室，就近找研究夥伴'],
+  [aSceneCowork, '跨院系研發中心', '師生討論區：圓桌、白板與書櫃'],
+  [aSceneExchange, '產學合作空間', '玻璃屋會客區，企業與團隊在此交流'],
+  [aSceneShop, '商業生活空間', '咖啡店與商店，為聚落帶來日常'],
+  [aScenePlazaA, '共創核心・圓形廣場', '階梯座位的下沉廣場，舉辦活動與交流'],
+  [aScenePlazaB, '綠地公共廣場', '步道、花圃與草地，城市裡的休憩綠洲'],
+  [aSceneTower, '產業・商業大樓', '玻璃帷幕大樓，代表產業端'],
+  [aSceneUniversity, '學界・大學建築', '紅磚外牆與藍色屋頂，代表學界端'],
+];
+const AScenes: Page = () => (
+  <Frame>
+    <Header section="空間設計" />
+    <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
+      <Eyebrow>STYLE A | Spaces</Eyebrow>
+      <Title size={56}>八個空間，組成一座共創聚落</Title>
+    </div>
+    <div className="cn-rise" style={{ position: 'absolute', top: TOP + 150, left: PAD, right: PAD, bottom: 96, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: 20, animationDelay: '120ms' }}>
+      {A_SCENES.map(([img, name, desc]) => (
+        <div key={name} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, background: c.card, borderRadius: 12, padding: '16px 20px 18px', boxShadow: '0 0 0 1px rgba(0,0,0,.05)' }}>
+          <div style={{ flex: 1, minHeight: 0, background: `url(${img}) center / contain no-repeat` }} />
+          <div style={{ marginTop: 10, fontSize: 26, fontWeight: 700 }}>{name}</div>
+          <div style={{ marginTop: 4, fontSize: 20, lineHeight: 1.5, color: c.muted }}>{desc}</div>
+        </div>
+      ))}
+    </div>
+    <PageNo />
+  </Frame>
+);
+
 const SiteMap: Page = () => (
   <Frame>
     <Header section="網站架構" />
@@ -600,7 +693,11 @@ const SiteMap: Page = () => (
       <Station n="07" name="一同起步" />
     </div>
     <div className="cn-rise" style={{ position: 'absolute', top: TOP + 316, left: PAD, right: PAD, animationDelay: '120ms' }}>
-      <Shot src={sitemapNight} w="100%" h={480} pos="50% 50%" />
+      <div style={{ position: 'relative' }}>
+        <Shot src={sitemapCowork} w="100%" h={480} />
+        {/* 半透明黑色遮罩：壓低亮度，讓上方站名卡片更突出 */}
+        <div style={{ position: 'absolute', inset: 0, borderRadius: 12, background: 'rgba(0,0,0,.25)', pointerEvents: 'none' }} />
+      </div>
     </div>
     <PageNo />
   </Frame>
@@ -1362,6 +1459,8 @@ export const notes: (string | undefined)[] = [
   '客戶不希望寫實還原大樓，所以我們把園區做成一座小城市。想解決的問題就一個：讓企業、教授、學生在同一個畫面裡看見彼此。',
   '先看開場影片，大概 50 秒，全部是用網站本身的 3D 場景錄的。（點擊播放）',
   '主視覺就三件事：用等角視角打造一座有趣的小城市、城裡有辦公、交流和休憩的人們，再加上日夜切換和配樂，讓人身歷其境。',
+  'A 款的品牌色彩有六個色系：活力橘、智慧藍、共創綠、溫暖棕、純淨白、寧靜黑，每個顏色旁邊是它在 3D 城市裡實際出現的樣子。',
+  '整座聚落由八個空間組成：辦公、研發、產學合作、商業生活，加上兩個廣場和代表產業、學界的兩棟建築。',
   '網站一共七站，每一站就是地圖上的一個鏡頭位置，滑一下就到下一站。',
   '接下來直接操作網站。先點一下畫面就能拖曳、滾動；要回簡報，點網站外面再按方向鍵。',
   '手機版一樣能操作，上面是地圖、下面是內容，用手指拖曳就能逛。',
@@ -1391,6 +1490,8 @@ export default [
   DesignCore,
   IntroFilm,
   KeyVisual,
+  AColor,
+  AScenes,
   SiteMap,
   LivePrototype,
   PhoneDemo,
