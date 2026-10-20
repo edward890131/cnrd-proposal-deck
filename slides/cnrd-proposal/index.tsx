@@ -25,8 +25,6 @@ import phoneHome from './assets/phone-home.jpg'; // 手機版首頁截圖（非�
 
 // ---------- Style B 素材（2026-10-19 從初稿「CRND 首屏投影 v68」截取） ----------
 import aCover from './assets/a-cover.jpg'; // A 款開場：滿版 MacBook 情境圖（CNRD_city.png 裁成 16:9）
-import bFilm from './assets/b-film.mp4'; // B 款概念影片 v4（1080p、43.5 秒）
-import bFilmPoster from './assets/b-film-poster.jpg'; // 影片 29.6 秒截格
 import bCover from './assets/b-cover.jpg'; // B 款開場：滿版 MacBook 情境圖
 import bHero from './assets/b-hero.jpg'; // 首屏 Grow Beyond
 import bCore from './assets/b-core.jpg'; // 色塊碰撞構圖（設計核心頁）
@@ -106,13 +104,14 @@ const B = {
     title: (n: number) => `${n} 種多變結構，一路推進，打開創造力`,
     shapes: [bShape00, bShape01, bShape02, bShape03, bShape04, bShape05, bShape06, bShape07, bShape08, bShape09, bShape10, bShape11],
   },
-  // 開場影片：還在製作，src 先留 null（頁面顯示「製作中」）；檔案到了放進 assets 再填 src／poster
+  // 開場影片：src 設為 null 會顯示「製作中」佔位畫面
   film: {
-    src: bFilm as string | null,
-    poster: bFilmPoster as string | null,
+    // 影片放在 B 網站正式版（una4498/crnd-B 的 film/），網站更新同檔名，簡報自動換新版
+    src: 'https://cnrd-b.vercel.app/film/b-film.mp4' as string | null,
+    poster: 'https://cnrd-b.vercel.app/film/b-film-poster.jpg' as string | null,
     title: '匯聚創意能量，打開多變視角', // 影片標題（空白就不顯示）
     subtitle: '',
-    duration: '0:44',
+    duration: '', // 留空＝自動從影片讀取片長
   },
   live: { hint: '往下捲動看轉場、點上方重播開場' },
   phone: {
@@ -918,7 +917,26 @@ const Style2Film: Page = () => {
       setPlaying(false);
     }
   }, [active]);
-  const { src, poster, title, subtitle, duration } = B.film;
+  const { src, poster, title, subtitle } = B.film;
+  // 片長：有填就用填的，沒填就從影片本身讀取（影片更新後自動跟著變）
+  const [autoDur, setAutoDur] = useState('');
+  useEffect(() => {
+    if (!src || B.film.duration) return;
+    const v = document.createElement('video');
+    v.preload = 'metadata';
+    v.src = src;
+    const onMeta = () => {
+      const t = Math.round(v.duration || 0);
+      if (t > 0) setAutoDur(`${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`);
+    };
+    v.addEventListener('loadedmetadata', onMeta);
+    return () => {
+      v.removeEventListener('loadedmetadata', onMeta);
+      v.removeAttribute('src');
+      v.load();
+    };
+  }, [src]);
+  const duration = B.film.duration || autoDur;
   return (
     <Frame style={{ background: '#000', color: '#fff' }}>
       {src && active && playing ? (
