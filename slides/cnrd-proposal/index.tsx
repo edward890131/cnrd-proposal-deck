@@ -133,7 +133,7 @@ const B = {
   },
   keyVisual: {
     title: 'Grow Beyond：產學共生，驅動創新未來',
-    keywords: ['取樣建築結構的多元色塊', '幾何的碰撞、變化與轉場', '捲動串連每一個段落'],
+    keywords: ['取樣建築結構的多元色塊', '象徵人才能量\n源源不絕的匯集', '幾何變化串連每一個段落'],
   },
   siteMap: {
     // 標題裡的數字跟著縮圖張數自動變
@@ -439,7 +439,7 @@ const DesignCore: Page = () => (
 const Keyword = ({ n, children }: { n: string; children: ReactNode }) => (
   <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, padding: '36px 0', borderBottom: `1px solid ${c.rule}` }}>
     <span style={{ fontFamily: 'var(--osd-font-display)', fontWeight: 700, fontSize: 28, color: 'var(--osd-accent)' }}>{n}</span>
-    <span style={{ fontSize: 44, fontWeight: 700, lineHeight: 1.3 }}>{children}</span>
+    <span style={{ fontSize: 44, fontWeight: 700, lineHeight: 1.3, whiteSpace: 'pre-line' }}>{children}</span>
   </div>
 );
 
@@ -1410,7 +1410,7 @@ export const notes: (string | undefined)[] = [
   '接下來是 B 款「創意匯流」，先看它的首頁在電腦上的樣子。',
   'B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
   '來看 B 款的概念影片，大約 44 秒。從色彩、形狀到動態，看這組色塊怎麼一路組成整個網站。（點擊播放）',
-  '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，幾何的碰撞、變化與轉場，以及用捲動把每個段落串起來。',
+  '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，象徵人才能量源源不絕的匯集，以及用幾何變化把每個段落串起來。',
   'B 款的色彩概念是 Different Minds, Shared Possibilities。不同領域、專業與觀點，各自保有鮮明的個性，透過交流、碰撞與組合，讓差異成為共創的起點。三個關鍵字：多元共存、交流碰撞、創造可能。',
   '色彩系統有五組：藍色代表科技、場域與探索，橘色是實踐、能量與轉化，黃色是靈感、好奇與可能，粉色是交流、溫度與共創，黑白則負責秩序、平衡與閱讀。',
   '往下捲的時候，故事會一直延續。同一組色塊會組合成不同的結構，分別代表場域、人才和產業推動。',
