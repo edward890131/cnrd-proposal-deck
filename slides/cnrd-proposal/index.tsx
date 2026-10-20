@@ -14,7 +14,8 @@ import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from 
 // ---------- 素材（網站真實畫面，2026-10-16 從正式網址重新截取） ----------
 import cityDay from './assets/city-day.jpg';
 import sitemapNight from './assets/sitemap-night.jpg'; // 網站架構頁：夜晚、正上方俯視、廣場置中（直接用橫幅比例 1680×480 @2x 截）
-import heroDay from './assets/hero-day.jpg';
+import heroDay from './assets/hero-day.jpg'; // 首屏白天（2026-10-20 正式網站，2880×1620）
+import heroNight from './assets/hero-night.jpg'; // 首屏夜晚（同上）
 import designSystemShot from './assets/design-system.jpg';
 import videoPoster from './assets/video-poster.jpg';
 import openingFilm from './assets/opening-film.mp4';
@@ -23,6 +24,7 @@ import mockupStyle2 from './assets/mockup-style2.jpg'; // MacBook Pro 情境照�
 import phoneHome from './assets/phone-home.jpg'; // 手機版首頁截圖（非播放中的縮圖用）
 
 // ---------- Style B 素材（2026-10-19 從初稿「CRND 首屏投影 v68」截取） ----------
+import aCover from './assets/a-cover.jpg'; // A 款開場：滿版 MacBook 情境圖（CNRD_city.png 裁成 16:9）
 import bCover from './assets/b-cover.jpg'; // B 款開場：滿版 MacBook 情境圖
 import bHero from './assets/b-hero.jpg'; // 首屏 Grow Beyond
 import bCore from './assets/b-core.jpg'; // 色塊碰撞構圖（設計核心頁）
@@ -128,6 +130,8 @@ const css = `
   .cn-rise { animation: cn-rise .7s cubic-bezier(.2,.8,.2,1) both; }
   [data-still] .cn-rise { animation: none !important; }
   @keyframes cn-rise { from { opacity: 0; transform: translateY(16px); } }
+  @keyframes cn-fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes cn-fade-out { from { opacity: 1; } to { opacity: 0; } }
   @media (prefers-reduced-motion: reduce) { .cn-rise { animation: none !important; } }
 `;
 if (typeof document !== 'undefined') {
@@ -402,6 +406,27 @@ const Keyword = ({ n, children }: { n: string; children: ReactNode }) => (
   </div>
 );
 
+// 首屏截圖：白天 ↔ 夜晚每 10 秒交叉淡入淡出（只在播放這頁時輪播；縮圖、總覽固定顯示白天）
+// open-slide 會關掉頁面裡的 transition，所以淡入淡出改用 keyframes 動畫；第一次切換前不加動畫，避免一開頁就閃一下夜晚
+const DayNightShot = ({ w, h }: { w: number; h: number }) => {
+  const active = useIsActivePage();
+  const [night, setNight] = useState(false);
+  const [moved, setMoved] = useState(false);
+  useEffect(() => {
+    if (!active) { setNight(false); setMoved(false); return; }
+    const id = setInterval(() => { setMoved(true); setNight(v => !v); }, 10000);
+    return () => clearInterval(id);
+  }, [active]);
+  return (
+    <div style={{ position: 'relative', width: w, height: h }}>
+      <Shot src={heroDay} w={w} h={h} />
+      <div style={{ position: 'absolute', inset: 0, opacity: night ? 1 : 0, animation: moved ? `${night ? 'cn-fade-in' : 'cn-fade-out'} 1.2s ease both` : 'none' }}>
+        <Shot src={heroNight} w={w} h={h} />
+      </div>
+    </div>
+  );
+};
+
 const KeyVisual: Page = () => (
   <Frame>
     <Header section="主視覺概念" />
@@ -411,12 +436,12 @@ const KeyVisual: Page = () => (
     </div>
     <div style={{ position: 'absolute', top: TOP + 148, left: PAD, right: PAD, display: 'flex', gap: 64, alignItems: 'center' }}>
       <div className="cn-rise" style={{ animationDelay: '100ms' }}>
-        <Shot src={heroDay} w={1060} h={596} />
+        <DayNightShot w={1060} h={596} />
       </div>
       <div style={{ flex: 1, borderTop: `1px solid ${c.rule}` }}>
-        <Keyword n="01">等角視角的小城市</Keyword>
-        <Keyword n="02">白天／夜晚自動切換</Keyword>
-        <Keyword n="03">一鏡到底的七站動線</Keyword>
+        <Keyword n="01">等角視角打造趣味城市</Keyword>
+        <Keyword n="02">辦公、交流和休憩的人們</Keyword>
+        <Keyword n="03">日夜切換與配樂身歷其境</Keyword>
       </div>
     </div>
     <PageNo />
@@ -537,7 +562,7 @@ const SiteMap: Page = () => (
     <Header section="網站架構" />
     <div style={{ position: 'absolute', top: TOP, left: PAD, right: PAD }}>
       <Eyebrow>Site map</Eyebrow>
-      <Title size={56}>七站，滑一下就到下一站</Title>
+      <Title size={56}>跟隨鏡頭，循序漸進探索空間亮點</Title>
     </div>
     <div style={{ position: 'absolute', top: TOP + 156, left: PAD, right: PAD, display: 'flex', gap: 16 }}>
       <Station n="01" name="總覽" />
@@ -713,6 +738,13 @@ const PhoneDemo: Page = () => {
 // 版面沿用 Style A 的同一套元件；文案都在檔案上方的 B 物件
 // =====================================================================
 // B 款開場：滿版 MacBook 情境圖（進入 Style B 前的過場頁）
+// A 款開場：跟 B 款開場同一個版型，滿版 MacBook 情境圖
+const StyleACover: Page = () => (
+  <Frame style={{ background: '#000' }}>
+    <img src={aCover} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+  </Frame>
+);
+
 const Style2Cover: Page = () => (
   <Frame style={{ background: '#000' }}>
     <img src={bCover} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -1098,9 +1130,10 @@ const Closing: Page = () => (
 export const notes: (string | undefined)[] = [
   '大家好，今天來介紹國泰產研中心「共創聚落」的官網提案。簡報很短，重點會放在影片跟現場操作。',
   '這次準備了兩種風格，左邊 A 款是 3D 微縮聚落，右邊 B 款是創意匯流。先介紹 A 款。',
+  '先看 A 款「3D 微縮聚落」的首頁在電腦上的樣子。',
   '客戶不希望寫實還原大樓，所以我們把園區做成一座小城市。想解決的問題就一個：讓企業、教授、學生在同一個畫面裡看見彼此。',
   '先看開場影片，大概 50 秒，全部是用網站本身的 3D 場景錄的。（點擊播放）',
-  '主視覺就三件事：等角的小城市、白天夜晚會自動切換、七站一鏡到底逛完。細節等一下直接看影片。',
+  '主視覺就三件事：用等角視角打造一座有趣的小城市、城裡有辦公、交流和休憩的人們，再加上日夜切換和配樂，讓人身歷其境。',
   '網站一共七站，每一站就是地圖上的一個鏡頭位置，滑一下就到下一站。',
   '接下來直接操作網站。先點一下畫面就能拖曳、滾動；要回簡報，點網站外面再按方向鍵。',
   '手機版一樣能操作，上面是地圖、下面是內容，用手指拖曳就能逛。',
@@ -1123,6 +1156,7 @@ export const meta: SlideMeta = {
 export default [
   Cover,
   Compare,
+  StyleACover,
   DesignCore,
   IntroFilm,
   KeyVisual,
