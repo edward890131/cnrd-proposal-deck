@@ -833,21 +833,7 @@ const bc = {
   ink: '#171717',
 };
 
-// 大標（英文／中文都用同一個樣式，逐行斷開）
-const BigTitle = ({ lines, size, top, lh }: { lines: string[]; size: number; top: number; lh: number }) => (
-  <h2
-    className="cn-rise"
-    style={{ position: 'absolute', top, left: PAD, margin: 0, fontSize: size, fontWeight: 700, lineHeight: `${lh}px`, letterSpacing: '-.01em' }}
-  >
-    {lines.map((l) => (
-      <span key={l} style={{ display: 'block', whiteSpace: 'nowrap' }}>
-        {l}
-      </span>
-    ))}
-  </h2>
-);
-
-// 第 1 頁右側的幾何構圖（Figma 座標，整組右移 40px 對齊簡報內距）
+// 第 1 頁右側的幾何構圖（Figma 座標，整組右移 40px、下移 100px 對齊簡報版面）
 const ColorShapes = () => (
   <svg
     className="cn-rise"
@@ -857,7 +843,7 @@ const ColorShapes = () => (
     style={{ position: 'absolute', inset: 0, pointerEvents: 'none', animationDelay: '160ms' }}
     aria-hidden
   >
-    <g transform="translate(40 0)">
+    <g transform="translate(40 100)">
       <circle cx={1694.5} cy={329.5} r={31.5} fill={bc.ink} />
       <circle cx={1487.5} cy={440.6} r={116.7} fill={bc.yellow} />
       <rect x={1236} y={239} width={182.5} height={182.5} rx={8} fill={bc.blue} />
@@ -882,10 +868,10 @@ const Style2ColorConcept: Page = () => (
     <Header section="Style B・色彩概念" />
     <div style={{ position: 'absolute', top: TOP, left: PAD }}>
       <Eyebrow>Color concept</Eyebrow>
+      <Title size={56}>{B.color.concept.title.join(' ')}</Title>
     </div>
     <ColorShapes />
-    <BigTitle lines={B.color.concept.title} size={110} top={250} lh={124} />
-    <p className="cn-rise" style={{ position: 'absolute', top: 596, left: PAD, margin: 0, fontSize: 30, lineHeight: 1.55, animationDelay: '100ms' }}>
+    <p className="cn-rise" style={{ position: 'absolute', top: 480, left: PAD, margin: 0, fontSize: 30, lineHeight: 1.55, animationDelay: '100ms' }}>
       {B.color.concept.body[0]}
       <br />
       {B.color.concept.body[1]}
@@ -918,7 +904,7 @@ const ColorRole = ({
 }) => (
   <div style={{ flex: 1, minWidth: 0 }}>
     <div style={{ borderRadius: 12, overflow: 'hidden', background: color }}>
-      <img src={src} alt="" style={{ width: '100%', height: 217, objectFit: 'cover', display: 'block' }} />
+      <img src={src} alt="" style={{ width: '100%', height: 300, objectFit: 'cover', display: 'block' }} />
       <div
         style={{
           height: 100,
@@ -947,9 +933,9 @@ const Style2ColorRoles: Page = () => (
     <Header section="Style B・色彩系統" />
     <div style={{ position: 'absolute', top: TOP, left: PAD }}>
       <Eyebrow>Color roles</Eyebrow>
+      <Title size={56}>{B.color.roles.title.join('')}</Title>
     </div>
-    <BigTitle lines={B.color.roles.title} size={92} top={214} lh={104} />
-    <div className="cn-rise" style={{ position: 'absolute', top: 469, left: PAD, right: PAD, display: 'flex', gap: 24, animationDelay: '140ms' }}>
+    <div className="cn-rise" style={{ position: 'absolute', top: TOP + 148, left: PAD, right: PAD, display: 'flex', gap: 24, animationDelay: '140ms' }}>
       <ColorRole src={bColorBlue} color={bc.blue} tag="KNOWLEDGE / EXPLORATION" name="BLUE" zh="科技、場域與探索" />
       <ColorRole src={bColorOrange} color={bc.orange} tag="ACTION / TRANSFORMATION" name="ORANGE" zh="實踐、能量與轉化" />
       <ColorRole src={bColorYellow} color={bc.yellow} dark tag="IDEAS / POSSIBILITY" name="YELLOW" zh="靈感、好奇與可能" />
@@ -975,14 +961,14 @@ const Style2ColorBreaking: Page = () => (
     <Header section="Style B・色彩策略" />
     <div style={{ position: 'absolute', top: TOP, left: PAD }}>
       <Eyebrow>{B.color.breaking.eyebrow}</Eyebrow>
+      <Title size={56}>{B.color.breaking.title.join(' ')}</Title>
     </div>
-    <BigTitle lines={B.color.breaking.title} size={100} top={222} lh={113} />
-    <p className="cn-rise" style={{ position: 'absolute', top: 486, left: PAD, margin: 0, fontSize: 30, lineHeight: 1.6, animationDelay: '100ms' }}>
+    <p className="cn-rise" style={{ position: 'absolute', top: TOP + 148, left: PAD, margin: 0, fontSize: 30, lineHeight: 1.6, animationDelay: '100ms' }}>
       {B.color.breaking.body[0]}
       <br />
       {B.color.breaking.body[1]}
     </p>
-    <div className="cn-rise" style={{ position: 'absolute', top: 679, left: PAD, right: PAD, display: 'flex', gap: 44, animationDelay: '180ms' }}>
+    <div className="cn-rise" style={{ position: 'absolute', top: 520, left: PAD, right: PAD, display: 'flex', gap: 44, animationDelay: '180ms' }}>
       <BreakPoint n="01" color={bc.blue} en="DISTINCT YET CONNECTED">
         讓不同色彩保持個性，
         <br />
