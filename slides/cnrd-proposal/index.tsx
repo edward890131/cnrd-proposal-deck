@@ -25,6 +25,8 @@ import phoneHome from './assets/phone-home.jpg'; // 手機版首頁截圖（非�
 
 // ---------- Style B 素材（2026-10-19 從初稿「CRND 首屏投影 v68」截取） ----------
 import aCover from './assets/a-cover.jpg'; // A 款開場：滿版 MacBook 情境圖（CNRD_city.png 裁成 16:9）
+import bFilm from './assets/b-film.mp4'; // B 款概念影片 v4（1080p、43.5 秒）
+import bFilmPoster from './assets/b-film-poster.jpg'; // 影片 29.6 秒截格
 import bCover from './assets/b-cover.jpg'; // B 款開場：滿版 MacBook 情境圖
 import bHero from './assets/b-hero.jpg'; // 首屏 Grow Beyond
 import bCore from './assets/b-core.jpg'; // 色塊碰撞構圖（設計核心頁）
@@ -106,11 +108,11 @@ const B = {
   },
   // 開場影片：還在製作，src 先留 null（頁面顯示「製作中」）；檔案到了放進 assets 再填 src／poster
   film: {
-    src: null as string | null,
-    poster: null as string | null,
-    title: '', // 影片標題（空白就不顯示）
+    src: bFilm as string | null,
+    poster: bFilmPoster as string | null,
+    title: '匯聚創意能量，打開多變視角', // 影片標題（空白就不顯示）
     subtitle: '',
-    duration: '',
+    duration: '0:44',
   },
   live: { hint: '往下捲動看轉場、點上方重播開場' },
   phone: {
@@ -1139,7 +1141,7 @@ export const notes: (string | undefined)[] = [
   '手機版一樣能操作，上面是地圖、下面是內容，用手指拖曳就能逛。',
   '接下來是 B 款「創意匯流」，先看它的首頁在電腦上的樣子。',
   'B 款從靈動的結構出發，把建築簡化成多元的色塊，用抽象的幾何展現多元活力。用抽象的方式示意能量的碰撞，以更前瞻的視角訴說品牌精神。',
-  'B 款的開場影片。（影片製作中，完成後補上）',
+  '來看 B 款的概念影片，大約 44 秒。從色彩、形狀到動態，看這組色塊怎麼一路組成整個網站。（點擊播放）',
   '這是 B 款從 loading 進到首屏的過程：先是 CRND 的建築平面，接著長出量體、轉成正面的色塊，最後帶出 Grow Beyond。三個重點：色塊取樣自建築結構，幾何的碰撞、變化與轉場，以及用捲動把每個段落串起來。',
   '往下捲的時候，故事會一直延續。同一組色塊會組合成不同的結構，分別代表場域、人才和產業推動。',
   '這頁是色塊在不同段落的樣子，同一組色塊一路推進，變出十二種不同的結構。',
