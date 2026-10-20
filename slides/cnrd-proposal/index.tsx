@@ -99,7 +99,7 @@ const B = {
   },
   siteMap: {
     // 標題裡的數字跟著縮圖張數自動變
-    title: (n: number) => `${n} 種多變結構，一路推進，打開創造力`,
+    title: (n: number) => `${n} 種結構，一路推進，打開創造力`,
     shapes: [bShape00, bShape01, bShape02, bShape03, bShape04, bShape05, bShape06, bShape07, bShape08, bShape09, bShape10, bShape11],
   },
   // 開場影片：還在製作，src 先留 null（頁面顯示「製作中」）；檔案到了放進 assets 再填 src／poster
